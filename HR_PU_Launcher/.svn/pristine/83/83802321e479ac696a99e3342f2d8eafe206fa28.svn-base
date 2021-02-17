@@ -1,0 +1,61 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+	    
+    <include
+        android:id="@+id/top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/activity_title"
+        />
+    
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/top">
+        <RelativeLayout 
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        >
+		    <TextView style="@style/font_40"
+		        android:id="@+id/tv_usb_state"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerHorizontal="true"
+		        android:gravity="center_horizontal"/>
+		    <Button style="@style/font_40_black"
+		        android:id="@+id/btn_test"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@id/tv_usb_state"
+		        android:layout_centerHorizontal="true"
+		        android:gravity="center"
+		        android:layout_marginTop="20dip"
+		        android:text="@string/str_usb_test"
+		        android:visibility="gone"
+		        />
+		    
+		    <TextView  style="@style/font_40"
+		        android:id="@+id/tv_report"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerHorizontal="true"
+		        android:layout_below="@id/tv_usb_state"
+		        android:gravity="center"
+		        android:text="@string/str_file_report"/>
+		    <TextView  style="@style/font_40_Red"
+		        android:id="@+id/tv_report1"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerHorizontal="true"
+		        android:layout_below="@id/tv_report"
+		        android:gravity="center"
+		        android:text="@string/str_file_report1"/>
+		 </RelativeLayout>
+    </RelativeLayout>
+    
+ 
+</RelativeLayout>

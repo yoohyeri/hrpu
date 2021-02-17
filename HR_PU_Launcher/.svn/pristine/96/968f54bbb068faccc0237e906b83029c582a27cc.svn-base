@@ -1,0 +1,139 @@
+package com.mobilusauto.app.productionprocess;
+
+import java.util.ArrayList;
+
+import com.mobilusauto.app.productionprocess.custom.dialog.MyProgressDialog;
+
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+/**
+ *
+ * @Date	: 2015. 2. 18.
+ * @Comment	: 
+ */
+public abstract class BaseActivity extends Activity {
+	
+	/**
+	 * Main Layout
+	 */
+	public RelativeLayout mainLayout;
+	
+	/**
+	 * Progress Bar
+	 */
+	public MyProgressDialog mProgressDialog;
+	
+	/**
+	 * List Dialog
+	 */
+	public Dialog mNewListDialog;
+	
+	public ListView mDialogListView;
+	
+	public TextView tvPopupTitle, mDialogListClose;
+	
+	/**
+	 * Tag Title List
+	 */
+	public ArrayList<String> prodinfoList = new ArrayList<String>();
+
+	/**
+	 * Parameter List
+	 */
+	public ArrayList<String> paramList = new ArrayList<String>();
+	
+	/**
+	 * Finish
+	 */
+	public boolean isFinish			= false;
+	
+	/**
+	 * Reload
+	 */
+	public boolean isReload			= false;
+	
+	/**
+	 * Activity Move
+	 */
+	public boolean isActivityMove	= false;
+	
+	@Override
+	public void onCreate(Bundle bundle) {
+		super.onCreate(bundle);
+		
+		// Create Progress Bar
+		createProgressBar();
+	}
+
+		
+	/**
+	 * createProgressBar
+	 * 
+	 * @Author	: wisechanii
+	 * @Date	: 2015. 2. 18.
+	 * @Comment	: ProgressBar
+	 *
+	 */
+	private void createProgressBar() {
+		mProgressDialog = new MyProgressDialog(this);
+	}
+	
+	/**
+	 * createMessageDialog
+	 * 
+	 * @Author	: wisechanii
+	 * @Date	: 2015. 2. 18.
+	 * @Comment	: MessageDialog
+	 *
+	 */
+	
+	
+	/**
+	 * mShowProgress
+	 * 
+	 * @Author	: wisechanii
+	 * @Date	: 2015. 2. 18.
+	 * @Comment	: Show Progress
+	 *
+	 */
+	@SuppressWarnings("static-access")
+	public void mShowProgress() {
+		if(mProgressDialog.isShowing())
+			mProgressDialog.dismiss();
+		
+		mProgressDialog = mProgressDialog.show(this, "", "", true, true, null);
+	}
+	
+	/**
+	 * mCancelProgress
+	 * 
+	 * @Author	: wisechanii
+	 * @Date	: 2015. 2. 18.
+	 * @Comment	:
+	 *
+	 */
+	public void mCancelProgress() {
+		mProgressDialog.dismiss();
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		
+		// Null ProgressDialog
+		if(mProgressDialog != null) {
+			mProgressDialog.dismiss();
+		}
+	}
+}

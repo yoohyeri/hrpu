@@ -1,0 +1,105 @@
+package com.mobilusauto.app.productionprocess;
+
+import java.util.*;
+
+import com.mobilusauto.app.productionprocess.R;
+
+import android.app.*;
+import android.bluetooth.BluetoothA2dp;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothProfile;
+import android.bluetooth.BluetoothProfile.ServiceListener;
+import android.content.*;
+import android.graphics.Color;
+import android.media.*;
+import android.media.AudioManager.OnAudioFocusChangeListener;
+import android.media.MediaRecorder.AudioSource;
+import android.os.*;
+import android.text.Html;
+import android.util.Log;
+import android.view.*;
+import android.view.View.*;
+import android.widget.*;
+import android.widget.RelativeLayout.*;
+import android.graphics.PorterDuff;
+
+
+public class FWIFActivity extends Activity{
+	private TextView mTitle;
+	private Button mResultOK, mResultNG;
+	private int mIndex;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_version);
+
+		mIndex = getIntent().getIntExtra("_key", 0);
+		String[] _str = getResources().getStringArray(R.array.arListTitle);
+		
+		View _view = (View) findViewById(R.id.top);
+		
+		mTitle = (TextView) _view.findViewById(R.id.tv_title);
+		mTitle.setText(_str[mIndex]);
+		
+		mResultOK = (Button) _view.findViewById(R.id.bt_result_ok);
+		mResultOK.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				MainActivity.getInstace().mSetResult(mIndex, MD_DEFINE.RESULT_OK);
+//				onBackPressed();
+				finish();
+			}
+		});
+		mResultOK.setEnabled(false);
+		
+		mResultNG = (Button) _view.findViewById(R.id.bt_result_ng);
+		mResultNG.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				MainActivity.getInstace().mSetResult(mIndex, MD_DEFINE.RESULT_NG);
+//				onBackPressed();
+				finish();
+			}
+		});
+		((TextView)_view.findViewById(R.id.tv_body)).setText(R.string.str_fw_if_body);
+		
+		TextView _ver = (TextView) findViewById(R.id.tv_ver);
+		
+		String _msg = getString(R.string.str_fw_ver);
+		_msg = _msg.replace("%s", SystemProperties.get("hms.mcu.version", ""));
+		
+		_ver.setText(_msg);
+	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+//		super.onBackPressed();
+	}
+	
+	Handler mHandlerOKEnable = new Handler();
+	Runnable mRunnableOKEnable = new Runnable() {
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			mResultOK.setEnabled(true);
+		}
+	};
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		mHandlerOKEnable.postDelayed(mRunnableOKEnable, _DEFINE.OK_ENABLE_TIME);
+		super.onResume();
+	}
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		mHandlerOKEnable.removeCallbacks(mRunnableOKEnable);
+		super.onPause();
+	}
+	
+}

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">YP_ProductionProcess</string>
+    
+    <string name="str_main_title">YP RSE TEST(FWDN:F26A000000000000006F)</string>
+    
+    <string name="str_ok">OK</string>
+    <string name="str_ng">NG</string>
+    
+    <string name="str_scan">Scan</string>
+    <string name="str_address">Address</string>
+    
+    <string name="str_search_for_devices">Search for devices</string>
+    
+    <string name="str_searching">Searching...</string>
+    
+    <string name="str_search">Search</string>
+    
+    <string name="str_fw_ver">FW Version : %s</string>
+    <string name="str_dvd_fw_ver">DVD MCU : %s</string>
+    <string name="str_dvd_deck_fw_ver">DVD DECK : %s</string>
+    
+    <string name="str_cur_file">Current File : %s</string>
+    <string name="str_next">재 시작</string>
+    
+    <string name="str_usb_state">SD State : %s</string>
+    <string name="str_usb_MOUNT">MOUNT</string>
+    <string name="str_usb_UNMOUNT">UNMOUNT</string>
+    <string name="str_usb_test">USB Test</string>
+    
+    <string name="str_file_report">Write File Name : %s\nWrite File Data : $s\nRead File Data : #s</string>
+    <string name="str_file_report1">File Delete : @s</string>
+    
+    
+    <string name="str_version">OS Ver. : %s\nMCU Ver. : #s</string>
+    <string name="str_result">RESULT&#160;:&#160;</string>
+    
+    <string name="str_bt_address">Bluetooth MAC Address : %s</string>
+    <string name="str_wifi_address">WiFi MAC Address : %s</string>
+    
+    <string name="str_paired_devices">PAIRED DEVICES</string>
+    <string name="str_available_devices">AVAILABLE DEVICES</string>
+    
+    <string name="str_aux_in_icon">Aux In Icon</string>
+    
+    <string name="str_fwdn">S/N : %s</string>
+    <string name="str_all">ALL</string>
+    <string name="str_rse">RSE</string>
+    <string name="str_dvd">DVD</string>
+    <string name="str_clear">Clear</string>
+    
+    <string name="str_hp_audio">HP 출력중</string>
+    <string name="str_aux_audio">AUX OUT 출력중</string>
+    
+    <string name="str_dlg_title">저장 상태 확인</string>
+    <string name="str_save_success">저장 성공</string>
+    <string name="str_save_fail">USB 저장 실패</string>
+    
+    <string name="str_clear_msg">테스트 결과를 삭제 하시겠습니까?</string>
+    <string name="str_clear_ok">Yes</string>
+    <string name="str_clear_no">No</string>
+    <string name="str_clear_confirm">Confirm</string>
+    
+    <string name="str_success">Success</string>
+    <string name="str_fail">Fail</string>
+    
+    
+    <string-array
+        name="arListTitle" >
+        <item>POWER KEY TEST</item>
+        <item>TOUCH TEST</item>
+        <item>LCD TEST</item>
+        <item>AUDIO TEST</item>
+        <item>SD Card TEST</item>
+        <item>GPS TEST</item>
+        <item>TPEG TEST</item>
+        <item>HD DMB TEST</item>
+        <item>CAMERA TEST</item>
+		<item>I/O TEST</item>
+        <item>SAVE CAS ID</item>
+        <item>SAVE RESULT</item>
+    </string-array>
+        
+    <string name="str_gps_btn">GPS 확인</string>
+   <!--  <string name="str_gps_body">1.GPS 확인 버튼 선택\n2.GPS프로그램에서 GPS가 정상적으로 표시 되는지 확인\n3.POWER KEY를 1회 눌러 GPS프로그램의 메뉴를 표출\n4.exit버튼을 눌러 GPS 프로그램 종료\n*GPS프로그램 좌우 드래그로 화면 이동 가능</string> -->
+   <string name="str_gps_body">1. 화면하단 GPS 감도 확인</string>
+	<string name="str_ill_body">1.ILL/AVTAIL 스위치 on/Off에 따른 상태값 변화 확인\n&#160;&#160;&#160;&#160;&#160;&#160;ILL+ 상태 : !s\n&#160;&#160;&#160;&#160;&#160;&#160;ILL- 상태 : @s\n&#160;&#160;&#160;&#160;&#160;&#160;AVTAIL 상태 : #s\n2.Speed 스위치 조작에 따른 상태값 변화 확인\n&#160;&#160;&#160;&#160;&#160;&#160;상태 : $s\n3.Reverse 스위치 조작에 따른 상태값 변화 확인\n&#160;&#160;&#160;&#160;&#160;&#160;상태 : %s</string>
+    <string name="str_rear_body">1.후방카메라 연결 후 후방카메라 스위치 on\n2.화면에 후방 카메라 출력 확인\n3.후방카메라 스위치 off\n4.생산 프로그램으로 화면이동 확인 </string>
+    <string name="str_power_key_body">1.POWER KEY를 눌러 LCD가 검은색으로 Off됨을 확인합니다.\n2.POWER KEY를 눌러 화면이 정상 표출 됨을 확인합니다.</string>
+    <string name="str_TSP_body">1.1,2,3,4,5를 순차적으로 터치시 정상 터치 입력 확인\n2.두 손가락으로 드래그 하여 두가지 선이 정상적으로 표시되는지 확인</string>
+    <string name="str_lcd_body">1.화면을 터치하여 Color가 정상적으로 표출 되는지 확인\n2.Brightness가 0~15Level로 자동 증가 되며 Brightness 변경 확인</string>
+    <string name="str_audio_body">1.1Khz Stereo가 출력되는 상태에서 오실로스코프 파형 검수\n  *파일 재생 후 0.2초 간격으로 Volume값이 0-15까지 자동 후 Volume 15유지\n2.라디오 입력 후 오실로스코프 파형검수</string>
+    <string name="str_audio_body_aux">1.1Khz Stereo가 출력되는 상태에서 오실로스코프 파형 검수\n  *파일 재생 후 0.2초 간격으로 Volume값이 0-15까지 자동 후 Volume 15유지\n</string>
+    <string name="str_audio_body_mg"></string>
+    <string name="str_audio_body_mg_aux"></string>
+    <!-- <string name="str_audio_body_cheonan">3.기준\n&#160;&#160;&#160;HP 1.88V ~ 2.08V\n&#160;&#160;&#160;Car 2.12V ~ 2.32V</string> -->
+    <string name="str_audio_body_cheonan"></string>
+    <string name="str_audio_body_cheonan_aux"></string>
+    <string name="str_usb_body">1.SD카드 삽입 후 SD카드가 정상적으로 연결 되었는지 확인\n2.SD카드 테스트 결과값(Write, Read, Delete)이 정상인지 확인\n3.SD카드 제거 후 SD카드가 정상적으로 제거 되었는지 확인\n*Write실패 시 SD카드를 UnLock하십시오.</string>
+    <string name="str_avin_body">1.AV-In연결 후 Video 및 Audio 정상 출력 확인\n2.AUDIO AUX OUT  오실로스코프 파형 검수\n파형 일그러짐 없을것\n  *Volume값은 15로 설정됨</string>
+    <string name="str_avin_body_cheonan">3.기준\n&#160;&#160;&#160;Car 2.3V ~ 2.5V</string>
+    <string name="str_hdmi_body">1.HDMI연결 후 Video 및 Audio HEADPHONE 정상 출력 확인\n2.AUDIO AUX OUT  오실로스코프 파형 검수\n파형 일그러짐 없을것\n  *Volume값은 15로 설정됨</string>
+    <string name="str_hdmi_body_cheonan">3.기준\n&#160;&#160;&#160;Car 2.22V ~ 2.42V\n</string>
+    
+    <string name="str_wifi_body">1.네트워크를 검색하여 리스트를 정상적으로 표시하는지 확인\n  *정상적으로 표출 하지 못할 시 좌측상단 Search로 리스트 갱신 후 확인\n2.화면 하단 WiFi Mac Address 정상 출력 확인\n3. WiFi Level pass 기준 -55이상 연두색 표시</string>
+    <string name="str_bluetooth_body">1.블루투스를 검색하여 리스트를 정상적으로 표시하는지 확인\n  *정상적으로 표출 하지 못할 시 좌측상단 Search로 리스트 갱신 후 확인\n2.화면 하단 Bluetooth Mac Address 정상 출력 확인</string>
+    <string name="str_fw_if_body">1.FW 버전이 정상적으로(0.1.X 형식) 출력 되는지 확인</string>
+    <string name="str_dvd_if_body">1.DVD MCU 버전이 정상적으로(XXXXXX_XXX_X.X.X.X_XXXXXX) 출력 되는지 확인\n2.DVD DECK 버전이 정상적으로(XX.X_XXXXXX) 출력 되는지 확인</string>
+    <string name="str_dvd_body">1.DVD삽입 후 Video정상 출력 확인\n2.Audio볼륨 확인(오실로스코프 파형 검수)\n파형 일그러짐 없을것\n  *Volume값은 15로 설정됨</string>
+    <string name="str_dvd_body_cheonan">3.기준\n&#160;&#160;&#160;Car 2.36V ~ 2.56V\n</string>
+    <string name="str_dvd_aux_body">1.AUX IN 연결시 정상 표기 확인\n</string>
+    <string name="str_dvd_key_body">1.POWER KEY을 누르지 않은 상태에서 POWER KEY 소등 확인, POWER KEY를 누른 상태에서 POWER KEY 점등 확인\n  *CENTER LED는 POWER KEY와 동일하게 동작함\n2.EJECT KEY을 누르지 않은 상태에서 EJECT KEY 소등 확인, EJECT KEY를 누른 상태에서 EJECT KEY 점등 확인\n  *KEY에 대한 테스트만 진행하며 DVD영상은 출력되지 않음\n3.Fan 동작 확인</string>
+    
+    <string name="str_wait1">잠시만 기다려 주십시오.</string>
+    <string name="str_wait2">잠시만 기다려 주십시오..</string>
+    <string name="str_wait3">잠시만 기다려 주십시오...</string>
+    
+    <string name="str_finish">Exit</string>
+    <string name="str_gps_state">GPS Version !a\n위성상태  %s/#s(fix/all)\n위성신호 30이상인 위성 :@s개\n신호30이상 위성 신호 평균값 : !s</string>
+    
+
+</resources>

@@ -1,0 +1,383 @@
+<FrameLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="peace.tabbutton.Fragment1" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:id="@+id/setting_main"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/setting_top"
+                android:layout_width="fill_parent"
+                android:layout_height="234dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingLeft="65dp"
+                android:paddingRight="65dp" >
+
+                <RelativeLayout
+                    android:id="@+id/setting_screen"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/screen_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="18dp"
+                        android:background="@drawable/btn_set_screen" />
+
+                    <TextView
+                        android:id="@+id/screen_text"
+                        style="@style/font_24"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|bottom"
+                        android:paddingBottom="30dp"
+                        android:text="@string/set_screen" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/setting_sound"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/sound_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="18dp"
+                        android:background="@drawable/btn_set_sound" />
+
+                    <TextView
+                        android:id="@+id/sound_text"
+                        style="@style/font_24"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|bottom"
+                        android:paddingBottom="30dp"
+                        android:text="@string/set_sound" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/setting_system"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/system_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="18dp"
+                        android:background="@drawable/btn_set_system" />
+
+                    <TextView
+                        android:id="@+id/system_text"
+                        style="@style/font_24"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|bottom"
+                        android:paddingBottom="30dp"
+                        android:text="@string/set_system" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/bottom"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/setting_bottom"
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/setting_fuel"
+                        style="@style/font_24"
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/set_fuel" />
+
+                    <RelativeLayout
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/btn_defualt"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/SelectDiesel"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="left|center"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/fuel_diesel_checkbox"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/check_off" />
+
+                            <TextView
+                                android:id="@+id/fuel_diesel_text"
+                                style="@style/font_24"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/set_fuel_diesel" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/btn_defualt"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/SelectElectric"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="left|center"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/fuel_electric_checkbox"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/check_off" />
+
+                            <TextView
+                                android:id="@+id/fuel_electric_text"
+                                style="@style/font_24"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/set_fuel_electric" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/btn_defualt"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/SelectLPG"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="left|center"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/fuel_lpg_checkbox"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/check_off" />
+
+                            <TextView
+                                android:id="@+id/fuel_lpg_text"
+                                style="@style/font_24"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/set_fuel_lpg" />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/setting_bottom2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+                    
+                     <RelativeLayout
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent" >
+
+                        <TextView
+                            android:id="@+id/setting_vehicle"
+                            style="@style/font_24"
+                            android:layout_width="match_parent"
+                            android:layout_height="33dp"
+                            android:gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/hidden_vehicle" />
+
+                        <TextView
+                            style="@style/font_20"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/setting_vehicle"
+                            android:gravity="center"
+                            android:text="(후방카메라)" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/btn_defualt"
+                        android:gravity="left|center"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/Select1T2W"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="left|center"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/_1T2W_checkbox"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/check_on" />
+
+                            <TextView
+                                android:id="@+id/_1T2W_text"
+                                style="@style/font_24"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/vehicle_1t_2w" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/btn_defualt"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/Select1T4W"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="left|center"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/_1T4W_checkbox"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/check_off" />
+
+                            <TextView
+                                android:id="@+id/_1T4W_text"
+                                style="@style/font_24"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/vehicle_1t_4w" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl1_2T2W"
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/btn_defualt"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/Select1_2T2W"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/_1_2T2W_checkbox"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/check_off" />
+
+                            <TextView
+                                android:id="@+id/_1_2T2W_text"
+                                style="@style/font_24"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/vehicle_1_2t_2w" />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/hiddenTab1"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
+        <TextView
+            android:id="@+id/hiddenTab2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="700dp" />
+
+        <TextView
+            android:id="@+id/hiddenTab3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="280dp" />
+
+        <TextView
+            android:id="@+id/hiddenTab4"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="700dp"
+            android:layout_marginTop="280dp" />
+    </RelativeLayout>
+
+</FrameLayout>

@@ -1,0 +1,81 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   	android:background="@android:color/transparent">
+	
+    <FrameLayout
+		android:id="@+id/fCameraPreview"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"/>
+    
+    <RelativeLayout
+        android:id="@+id/parking"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TextView
+            android:id="@+id/_h_parking_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/_h_parking_line"
+            android:visibility="gone" />
+        
+         <TextView
+            android:id="@+id/_k_parking_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/_k_parking_line"
+            android:visibility="gone" />
+        
+		<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="133dp"
+            android:gravity="center"
+            android:background="@drawable/parking" />
+		
+		
+		<com.mobilus.hp.rearcamera.CustomTextView
+		    android:id="@+id/notiMsg"
+		    style="@style/font_28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="195dp"
+            android:text="@string/noti_msg"/>
+
+		
+		<RelativeLayout 
+		    android:id="@+id/msg_reboot"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:background="@drawable/msg_bg">
+		    
+		    <TextView
+		        android:id="@+id/osd_notice"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="20dp"
+		        android:layout_marginLeft="30dp"
+		        android:background="@drawable/osd_icon_nitice" />
+		    
+		    <TextView
+		    android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:gravity="center"
+			android:paddingTop="5dp"
+			android:paddingBottom="5dp"
+			android:layout_marginLeft="20dp"
+			android:layout_toRightOf="@id/osd_notice"
+			android:text="@string/sdcard_rebooting_msg"
+			style="@style/msg_font" />       
+		    
+		</RelativeLayout>
+		
+		
+    </RelativeLayout>
+
+</RelativeLayout>

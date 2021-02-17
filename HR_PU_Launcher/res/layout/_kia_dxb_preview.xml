@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <View
+            android:id="@+id/dmb_preview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:clickable="true"
+            android:focusable="false" />
+
+        <RelativeLayout
+            android:id="@+id/noti_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@android:color/black"
+            android:orientation="vertical" >
+
+           <RelativeLayout
+                android:id="@+id/noti_view"
+                android:layout_width="fill_parent"
+                android:layout_height="300dp"
+                android:gravity="center"
+                android:layout_marginTop="100dp" 
+                android:visibility="visible" >
+
+                <RelativeLayout
+                    android:id="@+id/rl_noti_image"
+                    android:layout_width="fill_parent"
+                    android:layout_height="150dp"
+                    android:gravity="center" >
+                    
+	                <ImageView
+	                    android:id="@+id/noti_image"
+	                    android:layout_width="150dp"
+	                    android:layout_height="150dp" />
+                </RelativeLayout>
+                
+                <TextView
+                    android:id="@+id/noti_text"
+                    style="@style/font_26"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rl_noti_image"
+                    android:gravity="center" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/scan_view"
+                android:layout_width="fill_parent"
+                android:layout_height="360dp"
+                android:focusable="false"
+                android:gravity="center"
+                android:visibility="visible" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/scan_image"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/notice_scan" />
+
+                    <TextView
+                        android:id="@+id/scan_text"
+                        style="@style/font_26"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:gravity="center"/>
+
+                    <ProgressBar
+                        android:id="@+id/scan_progress"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:progressDrawable="@drawable/_kia_progress_bar"
+                        android:layout_width="356dp"
+                        android:layout_height="9dp"
+                        android:layout_marginTop="10dp"
+                        android:max="100"
+                        android:progress="10" />
+
+                    <LinearLayout
+                        android:layout_width="356dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/scan_txt_progress"
+                            style="@style/font_24"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="left|center"
+                            android:text="0%" />
+
+                        <TextView
+                            android:id="@+id/scan_txt_channel"
+                            style="@style/font_24"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right|center" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/btnScanStop"
+                        style="@style/font_24"
+                        android:layout_width="166dp"
+                        android:layout_height="59dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/_kia_btn_titlebar"
+                        android:gravity="center"
+                        android:text="@string/cancel" />
+                </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/dmb_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        
+        <!-- 생산 -->
+        <RelativeLayout
+            android:id="@+id/ProductionProcessLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" >
+
+            <include
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/_kia_dxb_manufacturing_progress" />
+        </RelativeLayout>
+	    
+        <!-- Title Bar -->
+
+        <LinearLayout
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_bar_h"
+            android:layout_marginTop="@dimen/status_bar_h" 
+            android:alpha="0.8"
+            android:background="@drawable/kia_top"
+            android:gravity="left|center"
+            android:orientation="horizontal" >
+
+            <!-- Icon, Channel Name -->
+            <LinearLayout
+                android:id="@+id/channel_info"
+                android:layout_width="@dimen/channel_name_w"
+                android:layout_height="match_parent"
+                android:layout_marginStart="25dp"
+                android:gravity="left|center" >
+
+                <TextView
+                    android:id="@+id/titlebar_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/kia_icon_normal"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/titlebar_title"
+                    style="@style/font_28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ellipsize="marquee"
+                    android:gravity="left|center"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:singleLine="true"
+                    android:text="@string/app_name" />
+            </LinearLayout>
+            
+            <!-- 
+            <TextView
+                android:id="@+id/btnVolume"
+                style="@style/font_24"
+                android:layout_width="@dimen/title_bar_btn_w"
+                android:layout_height="@dimen/title_bar_btn_h"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/_kia_btn_titlebar"
+                android:gravity="center"
+                android:text="@string/title_bar_volume" />
+
+            <TextView
+                android:id="@+id/btnList"
+                style="@style/font_24"
+                android:layout_width="@dimen/title_bar_btn_w"
+                android:layout_height="@dimen/title_bar_btn_h"
+                android:layout_marginLeft="3dp"
+                android:background="@drawable/_kia_btn_titlebar"
+                android:gravity="center"
+                android:text="@string/title_bar_list" />
+                 -->
+                 
+			<TextView
+                android:id="@+id/btnScan"
+                style="@style/font_24"
+                android:layout_width="107dp"
+                android:layout_height="@dimen/title_bar_btn_h"
+                android:layout_marginLeft="75dp"
+                android:background="@drawable/_kia_btn_titlebar"
+                android:paddingTop="7dp"
+                android:paddingLeft="8dp"
+                android:text="@string/scan" />
+ 
+            <TextView
+                android:id="@+id/btnMenu"
+                style="@style/font_24"
+                android:layout_width="@dimen/title_bar_btn_w"
+                android:layout_height="@dimen/title_bar_btn_h"
+                android:layout_marginLeft="3dp"
+                android:background="@drawable/_kia_btn_titlebar"
+                android:gravity="center"
+                android:text="@string/title_bar_menu" />
+
+            <TextView
+                android:id="@+id/btnBack"
+                android:layout_width="@dimen/title_bar_btn_w"
+                android:layout_height="@dimen/title_bar_btn_h"
+                android:layout_marginLeft="3dp"
+                android:background="@drawable/_kia_btn_back"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <RelativeLayout
+        android:id="@+id/toast_popup_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@id/title_bar"
+        android:layout_marginLeft="600dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/toast_popup_bg"
+        android:gravity="center"
+        android:paddingRight="10dp" >
+
+        <TextView
+            android:id="@+id/toast_weak_icon"
+            android:layout_width="38dp"
+            android:layout_height="33dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/icon_lack" />
+
+        <TextView
+            android:id="@+id/toast_weak_text"
+            style="@style/font_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="55dp"
+            android:gravity="center_vertical"
+            android:paddingRight="10dp"
+            android:text="@string/weak_signal" />
+    </RelativeLayout>
+    
+        <include
+            android:id="@+id/layout_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_bar"
+            android:layout_marginTop="300dp"
+            android:alpha="0.8"
+            layout="@layout/_kia_dxb_normal_bottom" >
+        </include>
+    </RelativeLayout>
+
+</RelativeLayout>

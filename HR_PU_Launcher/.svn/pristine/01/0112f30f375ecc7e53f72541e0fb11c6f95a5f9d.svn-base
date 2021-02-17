@@ -1,0 +1,662 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <TextView
+        android:id="@+id/tv_hidden"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true" />
+
+    <Button
+        android:id="@+id/btn_exit"
+        android:layout_width="100dp"
+        android:layout_height="65dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="22sp"
+        android:layout_marginTop="20dp"
+        android:text="Exit" />
+
+    <Button
+        android:id="@+id/btn_dr_calib"
+        android:layout_width="200dp"
+        android:layout_height="65dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:textSize="22sp"
+        android:layout_toRightOf="@id/btn_exit"
+        android:text="DR Calibration" />
+
+    <Button
+        android:id="@+id/btn_dr_reset"
+        android:layout_width="150dp"
+        android:layout_height="65dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:textSize="22sp"
+        android:layout_toRightOf="@id/btn_dr_calib"
+        android:text="DR Reset" />
+
+    <Button
+        android:id="@+id/btn_ubx_save"
+        android:layout_width="300dp"
+        android:layout_height="65dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:textSize="22sp"
+        android:layout_toRightOf="@id/btn_dr_reset"
+        android:text="@string/ubx_save_on" />
+
+    <LinearLayout
+        android:id="@+id/llTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_exit"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:id="@+id/tv_reverse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:text="1. Reverse Status : " />
+
+            <TextView
+                android:id="@+id/tv_reverse_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:layout_toRightOf="@id/tv_reverse" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:id="@+id/tv_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:text="2. Speed : " />
+
+            <TextView
+                android:id="@+id/tv_speed_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv_speed"
+                android:textSize="22sp"
+                android:text="0 Km/h"  />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/llTextView"
+        android:layout_marginLeft="20dp" >
+
+        <TextView
+            android:id="@+id/txt00"
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/txt01"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt00"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txt02"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt01"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txt03"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt02"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txt04"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt03"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txt05"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt04"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txt06"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt05"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txt07"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt06"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txt08"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt07"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txt09"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt08"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txt10"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt09"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txt11"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt10"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txt12"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt11"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txt13"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt12"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txt14"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt13"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txt15"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt14"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txt16"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt15"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txt17"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt16"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txt18"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt17"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txt19"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt18"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/txt20"
+            android:layout_width="30dp"
+            android:layout_height="fill_parent"
+            android:layout_alignBottom="@id/txt00"
+            android:layout_alignTop="@id/txt00"
+            android:layout_toRightOf="@id/txt19"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_seek01"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_above="@id/txt00"
+            android:layout_alignLeft="@id/txt01"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_seek02"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt02"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_seek03"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt03"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_seek04"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt04"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_seek05"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt05"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_seek06"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt06"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_seek07"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt07"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_seek08"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt08"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_seek09"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt09"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_seek10"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt10"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_seek11"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt11"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_seek12"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt12"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_seek13"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt13"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_seek14"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt14"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_seek15"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt15"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_seek16"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt16"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_seek17"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt17"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_seek18"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt18"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_seek19"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt19"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_seek20"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt20"
+            android:layout_marginLeft="5dp"
+            android:background="#00FF00" />
+
+        <TextView
+            android:id="@+id/tv_value01"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek01"
+            android:layout_alignLeft="@id/txt01"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_value02"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek02"
+            android:layout_alignLeft="@id/txt02"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_value03"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek03"
+            android:layout_alignLeft="@id/txt03"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_value04"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek04"
+            android:layout_alignLeft="@id/txt04"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_value05"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek05"
+            android:layout_alignLeft="@id/txt05"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_value06"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek06"
+            android:layout_alignLeft="@id/txt06"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_value07"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek07"
+            android:layout_alignLeft="@id/txt07"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_value08"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek08"
+            android:layout_alignLeft="@id/txt08"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_value09"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek09"
+            android:layout_alignLeft="@id/txt09"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_value10"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek10"
+            android:layout_alignLeft="@id/txt10"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_value11"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek11"
+            android:layout_alignLeft="@id/txt11"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_value12"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek12"
+            android:layout_alignLeft="@id/txt12"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_value13"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek13"
+            android:layout_alignLeft="@id/txt13"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_value14"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek14"
+            android:layout_alignLeft="@id/txt14"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_value15"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek15"
+            android:layout_alignLeft="@id/txt15"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_value16"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek16"
+            android:layout_alignLeft="@id/txt16"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_value17"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek17"
+            android:layout_alignLeft="@id/txt17"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_value18"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek18"
+            android:layout_alignLeft="@id/txt18"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_value19"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek19"
+            android:layout_alignLeft="@id/txt19"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_value20"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_seek20"
+            android:layout_alignLeft="@id/txt20"
+            android:layout_marginBottom="20dp"
+            android:gravity="center" />
+    </RelativeLayout>
+
+</RelativeLayout>

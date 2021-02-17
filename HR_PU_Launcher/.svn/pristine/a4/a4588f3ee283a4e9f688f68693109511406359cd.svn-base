@@ -1,0 +1,256 @@
+package com.mobilusauto.app.productionprocess;
+
+import java.io.IOException;
+import java.util.*;
+
+import com.mobilusauto.app.productionprocess.R;
+
+import junit.framework.TestResult;
+
+import android.app.*;
+import android.bluetooth.BluetoothA2dp;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothProfile;
+import android.bluetooth.BluetoothProfile.ServiceListener;
+import android.content.*;
+import android.content.res.AssetFileDescriptor;
+import android.graphics.Color;
+import android.media.*;
+import android.media.AudioManager.OnAudioFocusChangeListener;
+import android.media.MediaRecorder.AudioSource;
+import android.os.*;
+import android.text.Html;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.*;
+import android.view.View.*;
+import android.widget.*;
+import android.widget.RelativeLayout.*;
+import android.graphics.PorterDuff;
+import android.media.MediaPlayer.OnCompletionListener;
+import android.net.Uri;
+
+
+public class USBActivity extends Activity implements OnClickListener{
+	private TextView mTitle;
+	private Button mResultOK, mResultNG;
+	private int mIndex;
+	
+	private static boolean mIsUsbMount = false;
+	private static boolean mIsAlive		= false;
+	
+	private TextView mtv_title, mtv_report, mtv_report1;
+	private Button mbtn_test;
+	
+	String mWriteData, mReadData, mWriteFile;
+	boolean mDeleteState;
+	boolean mRunTesting = false;
+	
+	public static USBActivity 				mInstance;
+	public static USBActivity  getInstace(){
+        return mInstance;
+    }
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_usb);
+		
+		mInstance = this;
+
+		mIndex = getIntent().getIntExtra("_key", 0);
+		String[] _str = getResources().getStringArray(R.array.arListTitle);
+		
+		View _view = (View) findViewById(R.id.top);
+		
+		mTitle = (TextView) _view.findViewById(R.id.tv_title);
+		mTitle.setText(_str[mIndex]);
+		
+		mResultOK = (Button) _view.findViewById(R.id.bt_result_ok);
+		mResultOK.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				MainActivity.getInstace().mSetResult(mIndex, MD_DEFINE.RESULT_OK);
+//				onBackPressed();
+				finish();
+			}
+		});
+		mResultOK.setEnabled(false);
+		
+		mResultNG = (Button) _view.findViewById(R.id.bt_result_ng);
+		mResultNG.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				MainActivity.getInstace().mSetResult(mIndex, MD_DEFINE.RESULT_NG);
+//				onBackPressed();
+				finish();
+			}
+		});
+		((TextView)_view.findViewById(R.id.tv_body)).setText(R.string.str_usb_body);
+		((TextView) findViewById(R.id.tv_body)).setLineSpacing(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5.0f, getResources().getDisplayMetrics()), 0.8f);
+		((TextView)_view.findViewById(R.id.tv_body)).setTextSize(21);
+		//----------------------------------
+		mtv_title = (TextView) findViewById(R.id.tv_usb_state);
+		mtv_title.setTextSize(21);
+		mbtn_test = (Button) findViewById(R.id.btn_test);
+		mbtn_test.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				TestStart();
+			}
+		});
+		mtv_report = (TextView) findViewById(R.id.tv_report);
+		mtv_report.setVisibility(View.INVISIBLE);
+		mtv_report.setTextSize(21);
+		
+		mtv_report1 = (TextView) findViewById(R.id.tv_report1);
+		mtv_report1.setVisibility(View.INVISIBLE);
+		mtv_report1.setTextSize(21);
+	}
+	
+	Handler mHandlerOKEnable = new Handler();
+	Runnable mRunnableOKEnable = new Runnable() {
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			mResultOK.setEnabled(true);
+		}
+	};
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub	
+		super.onResume();
+		
+		mIsAlive = true;
+		mUpdateDisplay();
+		if(mIsUsbMount)	getInstace().TestStart();
+	}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		mHandlerOKEnable.removeCallbacks(mRunnableOKEnable);
+		
+		super.onPause();
+		
+		
+		mIsAlive = false;
+	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+//		super.onBackPressed();
+	}
+	
+	@Override
+	public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	//--------------
+	public void mUpdateDisplay() {
+		String _msg = getResources().getString(R.string.str_usb_state);
+		if(mIsUsbMount)	{
+//			mResultOK.setEnabled(true);
+			if(mRunTesting == false)	mbtn_test.setEnabled(true);
+			_msg = _msg.replace("%s", getResources().getString(R.string.str_usb_MOUNT));
+		}
+		else			{
+			mResultOK.setEnabled(false);
+			if(mRunTesting == false)	mbtn_test.setEnabled(false);
+			_msg = _msg.replace("%s", getResources().getString(R.string.str_usb_UNMOUNT));
+		}
+		mtv_title.setText(_msg);
+	}		
+	private void mUpdateReport() {
+		mtv_report.setVisibility(View.VISIBLE);
+		mtv_report1.setVisibility(View.VISIBLE);
+		
+		String _msg = getString(R.string.str_file_report);
+		_msg = _msg.replace("%s", mWriteFile);
+		_msg = _msg.replace("$s", mWriteData);
+		_msg = _msg.replace("#s", mReadData);
+		mtv_report.setText(_msg);
+		
+		
+		_msg = getString(R.string.str_file_report1);
+		if(mDeleteState)	{
+			_msg = _msg.replace("@s", getString(R.string.str_ok));
+			mtv_report1.setTextColor(_DEFINE.mYellowGreen);
+		}
+		else				_msg = _msg.replace("@s", getString(R.string.str_ng));
+		mtv_report1.setText(_msg);
+
+				
+		
+		mRunTesting = false;
+		if(mIsUsbMount)	mHandlerOKEnable.postDelayed(mRunnableOKEnable, _DEFINE.OK_ENABLE_TIME);
+	}
+	
+	public static void mSetUSBState(boolean _flag) {
+		mIsUsbMount = _flag;
+		
+		if(mIsAlive) {
+			new Handler().postDelayed(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					getInstace().mtv_report.setVisibility(View.INVISIBLE);
+					getInstace().mtv_report1.setVisibility(View.INVISIBLE);
+					getInstace().mUpdateDisplay();
+					if(mIsUsbMount)	getInstace().TestStart();
+				}
+			}, 1);
+		}
+	}
+	public static boolean mGetAlive() { 
+		return mIsAlive;
+	}
+	
+	private void TestStart() {
+		// TODO Auto-generated method stub
+		if(mRunTesting)	return;
+		
+		mRunTesting = true;
+		mbtn_test.setEnabled(false);
+		
+		mWriteData = "";
+		mWriteFile = "";
+		mReadData = "";
+		mDeleteState = false;
+		
+		mtv_report.setVisibility(View.INVISIBLE);
+		mtv_report1.setVisibility(View.INVISIBLE);
+		
+		new MFileTestAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+	
+	private class MFileTestAsyncTask extends AsyncTask<Void, Void, Boolean> {
+		@Override
+		protected Boolean doInBackground(Void... arg0) {
+			
+			
+			mWriteData = DEBUG_.createTestFile();
+			mWriteFile = DEBUG_.getTestFileName();
+			mReadData = DEBUG_.readFile();
+			mDeleteState = DEBUG_.DeleteTestFile();
+			
+			boolean mClearState;
+			
+			return true;
+		}
+
+		@Override
+		public void onPostExecute(Boolean _st) {
+			mUpdateReport();
+		}
+	}
+}

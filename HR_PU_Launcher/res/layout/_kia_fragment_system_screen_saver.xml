@@ -1,0 +1,120 @@
+<FrameLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="peace.tabbutton.Fragment1" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="@dimen/btn_screen_saver_w"
+            android:layout_height="@dimen/btn_screen_saver_h" >
+
+            <TextView
+                android:id="@+id/btnSaverDigital"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/_kia_btn_saver_digital"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="13dp" >
+
+                <TextView
+                    android:id="@+id/radioDigital"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/radio_on" />
+
+                <TextView
+                    android:id="@+id/txtDigitial"
+                    style="@style/font_24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:text="@string/screen_saver_digital" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/btn_screen_saver_w"
+            android:layout_height="@dimen/btn_screen_saver_h"
+            android:layout_marginLeft="5dp"
+             >
+
+            <TextView
+                android:id="@+id/btnSaverAnalog"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/_kia_btn_saver_analog" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="13dp" >
+
+                <TextView
+                    android:id="@+id/radioAnalog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/radio_on" />
+
+                <TextView
+                    android:id="@+id/txtAnalog"
+                    style="@style/font_24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:text="@string/screen_saver_analog" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/btn_screen_saver_w"
+            android:layout_height="@dimen/btn_screen_saver_h"
+            android:layout_marginLeft="5dp" >
+
+            <TextView
+                android:id="@+id/btnSaverNone"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/_kia_btn_saver_none" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="13dp" >
+
+                <TextView
+                    android:id="@+id/radioNone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/radio_on" />
+
+                <TextView
+                    android:id="@+id/txtNone"
+                    style="@style/font_24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:text="@string/screen_saver_none" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>

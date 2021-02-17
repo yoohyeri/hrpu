@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/black"
+    tools:context="${relativePackage}.${activityClass}" >
+    
+    <RelativeLayout
+        android:id="@+id/rl_common"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" >
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/font_26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HDDMB Test" />
+
+        <TextView
+            android:id="@+id/bt_result"
+            style="@style/font_26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_toRightOf="@id/tv_title"
+            android:text="RESULT : " />
+
+        <Button
+            android:id="@+id/bt_result_ok"
+            style="@style/font_26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/bt_result"
+            android:text="@string/str_ok" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/bt_result_ng"
+        style="@style/font_26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="125dp"
+        android:layout_toRightOf="@id/rl_common"
+        android:text="@string/str_ng" />
+
+    <Button
+        android:id="@+id/bt_scan"
+        style="@style/font_26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan" />
+
+    <TextView
+        android:id="@+id/tv_body"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_common" />
+
+    <TextView
+        android:id="@+id/tv_body1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_body"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_body2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_body1"
+        android:visibility="gone" />
+
+</RelativeLayout>

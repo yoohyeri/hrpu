@@ -1,0 +1,28 @@
+package android_serialport_api.sample;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+
+/**
+ * @Project	: R1PDrivingInfo
+ * @Package : com.hms.r1p.drivinginfo.receiver
+ * @Name	: RCV_Mounted.java
+ * @Author	: hlson@hitecms.co.kr
+ * @Date	: 2016. 5. 26.
+ * @Description	: 
+ */
+public class receiverBoot extends BroadcastReceiver {
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		// TODO Auto-generated method stub
+		Log.d("debug", "=>> [2] onReceive Intent.ACTION_BOOT_COMPLETED");
+		if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
+			Log.d("debug", "=>> [2] onReceive Intent.ACTION_BOOT_COMPLETED 11 ");
+            Intent i = new Intent(context, ServiceUart.class);
+
+            context.startService(i);
+		} 
+	}
+}

@@ -1,0 +1,190 @@
+package com.mobilusauto.app.productionprocess;
+
+import java.util.*;
+
+import com.mobilusauto.app.productionprocess.R;
+
+import android.app.*;
+import android.bluetooth.BluetoothA2dp;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothProfile;
+import android.bluetooth.BluetoothProfile.ServiceListener;
+import android.content.*;
+import android.graphics.Color;
+import android.media.*;
+import android.media.AudioManager.OnAudioFocusChangeListener;
+import android.media.MediaRecorder.AudioSource;
+import android.os.*;
+import android.text.Html;
+import android.util.Log;
+import android.view.*;
+import android.view.View.*;
+import android.widget.*;
+import android.widget.RelativeLayout.*;
+import android.graphics.PorterDuff;
+
+
+public class DVDKeyActivity extends Activity implements OnClickListener, OnDVDProtocal{
+
+	private TextView mTitle;
+	private Button mResultOK, mResultNG;
+	private int mIndex;
+	
+	
+	TextView mTV_eject, mTV_light, mTV_power;
+	
+	private final String FILTER_TEST_MODE = "android.hmsintent.action.TEST_MODE";
+	private final String PUTEXTRA_NAME	= "Test Mode";
+	private final String PUTEXTRA_NAME_VALUE_START	= "start";
+	private final String PUTEXTRA_NAME_VALUE_STOP	= "stop";
+	
+	private final String FILTER_DVD_KEY = "android.hmsintent.action.KEY_STATE";
+	private final String PUTEXTRA_NAME_NUMBER	= "Key Number";
+	private final String PUTEXTRA_NAME_STATE	= "Key State";
+	private final String PUTEXTRA_NAME_VALUE_DEFAULT = "";
+	
+	String mKeyName, mKeyState;
+	
+	Handler mUpdateHandler = new Handler();
+	private boolean mIsActionEject, mIsActionPower;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_fan);
+
+		mIndex = getIntent().getIntExtra("_key", 0);
+		String[] _str = getResources().getStringArray(R.array.arListTitle);
+		
+View _view = (View) findViewById(R.id.top);
+		
+		mTitle = (TextView) _view.findViewById(R.id.tv_title);
+		mTitle.setText(_str[mIndex]);
+		
+		mResultOK = (Button) _view.findViewById(R.id.bt_result_ok);
+		mResultOK.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				MainActivity.getInstace().mSetResult(mIndex, MD_DEFINE.RESULT_OK);
+//				onBackPressed();
+				finish();
+			}
+		});		
+		mResultNG = (Button) _view.findViewById(R.id.bt_result_ng);
+		mResultNG.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				MainActivity.getInstace().mSetResult(mIndex, MD_DEFINE.RESULT_NG);
+//				onBackPressed();
+				finish();
+			}
+		});
+		((TextView)_view.findViewById(R.id.tv_body)).setText(R.string.str_dvd_key_body);
+
+		mTV_eject = (TextView) findViewById(R.id.tv_eject); 
+		mTV_light = (TextView) findViewById(R.id.tv_light); 
+		mTV_power = (TextView) findViewById(R.id.tv_power);
+	}
+	
+	Runnable mUpdateRunnable = new Runnable() {
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			mUpdateDisplay();
+		}
+	};
+
+	void mUpdateDisplay() {
+		if(mKeyName.equals("power")) {
+			if(mKeyState.equals("push")) {
+				mIsActionPower = true;
+				mTV_light.setVisibility(View.VISIBLE);
+				mTV_power.setVisibility(View.VISIBLE);
+			} else {
+				mTV_light.setVisibility(View.INVISIBLE);
+				mTV_power.setVisibility(View.INVISIBLE);
+			}
+		} else if(mKeyName.equals("eject")) {
+			mIsActionEject = true; 
+			if(mKeyState.equals("push")) {
+				mTV_eject.setVisibility(View.VISIBLE);
+			} else {
+				mTV_eject.setVisibility(View.INVISIBLE);
+			}
+		} else {
+			mTV_eject.setVisibility(View.INVISIBLE);
+			mTV_light.setVisibility(View.INVISIBLE);
+			mTV_power.setVisibility(View.INVISIBLE);
+		}
+		
+		if(mIsActionPower && mIsActionEject)	mResultOK.setEnabled(true);
+	}
+	
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+//		registerReceiver(mReceiver, filter);
+//		
+//		Intent _intent = new Intent(FILTER_TEST_MODE);
+//		_intent.putExtra(PUTEXTRA_NAME, PUTEXTRA_NAME_VALUE_START);
+//		sendBroadcast(_intent);
+		
+		mIsActionEject = false; 
+		mIsActionPower = false;
+		mResultOK.setEnabled(false);
+		
+		MainActivity.getInstace().setDVDEventListener(this);
+		MainActivity.getInstace().mSetTestMode(true);
+		
+		super.onResume();
+	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+//		super.onBackPressed();
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		
+		MainActivity.getInstace().setDVDEventListener(null);
+		MainActivity.getInstace().mSetTestMode(false);
+		
+//		unregisterReceiver(mReceiver);
+		
+		Intent _intent = new Intent(FILTER_TEST_MODE);
+		_intent.putExtra(PUTEXTRA_NAME, PUTEXTRA_NAME_VALUE_STOP);
+		sendBroadcast(_intent);
+		
+		finish();
+	}
+
+
+	@Override
+	public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+		
+	};
+	
+	@Override
+	public void onDVDKeyState(String key, String action) {
+		// TODO Auto-generated method stub
+		mKeyName = key;
+    	mKeyState = action;
+    	mUpdateHandler.postDelayed(mUpdateRunnable, 1);
+	}
+	@Override
+	public void onDVDFWVer(String value) {
+		// TODO Auto-generated method stub
+	}
+	@Override
+	public void onDVDDeckVer(String value) {
+		// TODO Auto-generated method stub
+	}
+}

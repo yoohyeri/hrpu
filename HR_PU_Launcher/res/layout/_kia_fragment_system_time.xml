@@ -1,0 +1,100 @@
+<FrameLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="peace.tabbutton.Fragment1" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center"
+        android:orientation="vertical"
+        android:paddingLeft="35dp" >
+
+        <!-- 자동 시간 설정 -->
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="67dp"
+            android:gravity="center"
+            android:orientation="vertical" 
+            android:background="@drawable/_kia_lcd_list_item">
+
+            <TextView
+                android:id="@+id/SelectAutoTime"
+                android:layout_width="220dp"
+                android:layout_height="match_parent"   />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/checkBoxAutoTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/kia_check_off" />
+
+                <TextView
+                    android:id="@+id/txtAutoTime"
+                    style="@style/font_28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/set_auto_time" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line" />
+        
+        <!-- 시간설정 -->
+        <include
+            layout="@layout/_kia_layout_time_setting"/>
+		
+		<TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line" />
+
+        <!-- 24 시간 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:background="@drawable/_kia_lcd_list_item"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/Select24Hour"
+                android:layout_width="130dp"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/checkBox24Hour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/kia_check_off" />
+
+                <TextView
+                    android:id="@+id/txt24Hours"
+                    style="@style/font_28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/set_24_hour" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>

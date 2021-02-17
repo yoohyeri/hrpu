@@ -1,0 +1,61 @@
+package com.mobilusauto.app.productionprocess.sharedpreferences;
+
+import android.content.*;
+
+/**
+ * The Class MShare.
+ * @author ThinkCodeHelp
+ * @version $Revision: 1.0 $
+ */
+public class MSharedPreferences {
+	//key
+	Context mContext;
+	public SharedPreferences mSharePreferences;
+	public SharedPreferences.Editor mSharedPreferencesEdit;
+	public String mSHARE_NAME;
+	
+	
+	public MSharedPreferences(Context c) {
+		mContext = c;
+		mSHARE_NAME = MD_FINAL.SHARE_NAME;
+		mCreateSharedPreferences();   		
+	}	
+	
+	public MSharedPreferences(Context c, String name) {
+		mContext = c;
+		
+		if(name.length() <= 0)	name = MD_FINAL.SHARE_NAME;
+		
+		mSHARE_NAME = name;
+		mCreateSharedPreferences();   		
+	}	
+	
+	private void mCreateSharedPreferences() {		
+		mSharePreferences = mContext.getSharedPreferences(mSHARE_NAME, Context.MODE_MULTI_PROCESS | Context.MODE_WORLD_READABLE);
+		mSharedPreferencesEdit = mSharePreferences.edit();
+	}
+	
+	//--------------Get-----------------------
+	public String mGetSharedDataString(String _key, String _default) {
+		return  mSharePreferences.getString(_key, _default);
+	}	
+	public int mGetSharedDataInt(String _key, int _default) {
+		return mSharePreferences.getInt(_key, _default);
+	}	
+	public Boolean mGetSharedDataBool(String _key, Boolean _default) {
+		return mSharePreferences.getBoolean(_key, _default);
+	}
+	//--------------Put-----------------------	
+	public void mSetSharedData(String _key, String _value) {
+		mSharedPreferencesEdit.putString(_key, _value);
+		mSharedPreferencesEdit.commit();
+	}	
+	public void mSetSharedDataInt(String _key, int _value) {
+		mSharedPreferencesEdit.putInt(_key, _value);
+		mSharedPreferencesEdit.commit();
+	}	
+	public void mSetSharedDataBool(String _key, Boolean _value) {
+		mSharedPreferencesEdit.putBoolean(_key, _value);
+		mSharedPreferencesEdit.commit();
+	}
+}

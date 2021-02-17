@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2013 Telechips, Inc.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+    <color name="progressbar_back">#333333</color>
+    
+	<color name="appwidget_text">#ff000000</color>
+	<color name="appwidget_shadow">#ffffffff</color>
+	<color name="dragndrop_background">#ff0000ff</color>
+	<color name="debug_text">#FFFFFFFF</color>
+	<color name="trans_background">#00000000</color>
+	<color name="weak_signal_text_color">#FFEFEFEF</color>
+	<color name="list_title">#FFE0E0E0</color>
+	<color name="list_title_pre">#FFBC6320</color>
+	<color name="list_subtitle">#FF959595</color>
+	<color name="list_subtitle_pre">#FFBC6320</color>
+
+	<color name="color_black">#000000</color>
+	<color name="color_white">#FFFFFFFF</color>
+	<color name="color_2">#FF101010</color>
+	<color name="color_3">#FF111621</color>
+	<color name="color_4">#FF505050</color>
+	<color name="color_yellow">#FFF8C400</color>
+	<color name="color_6">#FF373737</color>
+	<color name="color_8">#FF606060</color>
+	<color name="color_9">#FF999999</color>
+	<color name="color_red">#FFFF0000</color>
+	<color name="color_t">#ff1a1a1a</color>
+	
+	<color name="hrpu_seekbar_fill_hyundai">#257AE9</color>
+	<color name="hrpu_seekbar_fill_kia">#e81a1a</color>
+	<color name="hrpu_seekbar_bg_hyundai">#515151</color>
+	
+	
+	<color name="dmb_widget_titlebar_bg">#2f4e7a</color>
+	<color name="hyundai_dmb_widget_titlebar_bg">#2f4e7a</color>
+	<color name="kia_dmb_widget_titlebar_bg">#e81a1a</color>
+	
+	
+	<color name="clr_bg">#ff101010</color>
+    <color name="clr_bg_back">#ff1a1a1a</color>
+    <color name="clr_bg_select">#ff2375b5</color>
+	<color name="clr_txt_normal">#ffffffff</color>
+	<color name="clr_txt_select">#ff5ec81f</color>
+</resources>
+

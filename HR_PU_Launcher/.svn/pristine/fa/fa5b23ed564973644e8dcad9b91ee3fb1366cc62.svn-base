@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2013 Telechips, Inc.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_channel_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+	<SurfaceView
+		android:id="@+id/surface_view"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:clickable="true"
+		android:visibility="visible">
+	</SurfaceView>
+	
+<!-- 
+	<RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingLeft="404dp"
+        android:paddingTop="15dp"
+        android:visibility="visible" >
+
+        <include
+            android:id="@+id/layout_widget"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            layout="@layout/dxb_widget" >
+        </include>
+    </RelativeLayout>
+ -->
+	<include
+		android:id="@+id/layout_normal"
+		android:visibility="invisible"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		layout="@layout/dxb_normal"	>
+	</include>
+	
+	<include
+		android:id="@+id/layout_full"
+		android:visibility="invisible"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		layout="@layout/dxb_full" >
+	</include>	
+	<!-- 
+	<include
+		android:id="@+id/screen_saver_layout_full"
+		android:visibility="invisible"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		layout="@layout/screen_saver_full" >
+	</include>	
+	 -->
+	
+	<include
+	    android:id="@+id/layout_cas_debug"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    layout="@layout/dxb_cas_status_debug"
+	    android:visibility="gone" />
+
+	
+	<RelativeLayout
+	    android:id="@+id/layout_strength"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:visibility="visible">
+		
+		<TextView
+		      android:id="@+id/tvStrength"
+		      android:layout_marginLeft="10dp"
+			  android:gravity="bottom"
+		      android:layout_width="fill_parent"
+		      android:layout_height="fill_parent"
+		      android:textColor="#ff00ff"
+		      android:textStyle="bold"
+		      android:background="#00000000"
+		      android:textSize="26sp" />
+	 </RelativeLayout>
+	 
+		<RelativeLayout
+	    android:id="@+id/layout_speed"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:visibility="visible">
+		
+		<TextView
+		      android:id="@+id/tvSpeed"
+		      android:layout_marginTop="200dp"
+		      android:layout_marginLeft="400dp"
+		      android:layout_width="wrap_content"
+		      android:layout_height="wrap_content"
+		      android:textColor="#f200ff"
+		      android:textStyle="bold"
+		      android:background="#00000000"
+		      android:text="test"
+		      android:textSize="30sp" />
+	 </RelativeLayout>
+</AbsoluteLayout>

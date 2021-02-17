@@ -1,0 +1,425 @@
+package com.mobilusauto.app.productionprocess;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import com.mobilusauto.app.productionprocess.R;
+
+import android.app.Activity;
+import android.bluetooth.BluetoothA2dp;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothProfile;
+import android.bluetooth.BluetoothUuid;
+import android.bluetooth.BluetoothProfile.ServiceListener;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.HMSIndex;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.location.GpsSatellite;
+import android.location.GpsStatus;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.media.*;
+import android.media.AudioManager.OnAudioFocusChangeListener;
+import android.media.MediaRecorder.*;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IHMSCommunicationService;
+import android.os.IYPService;
+import android.os.Message;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.SystemProperties;
+import android.util.Log;
+import android.view.*;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.widget.*;
+import android.widget.RelativeLayout.LayoutParams;
+
+public class GPSActivity extends Activity implements OnClickListener, LocationListener{
+	private TextView mTitle;
+	private Button mResultOK, mResultNG;
+	private int mIndex;
+	
+	private TextView[] arNumber = new TextView[20];
+	private TextView[] arbar = new TextView[20];
+	private TextView[] arValue = new TextView[20];
+	TextView mTV_State;
+	public final static String PROPERTIES_GPS_VERSION = "mtx.gps.version";
+	
+	Handler mHandler = new Handler();
+	Runnable mRunnable = new Runnable() {
+		
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			Intent intent = getPackageManager().getLaunchIntentForPackage("com.ublox.ucenter");
+	        if(intent != null)
+	        {
+	        	new Handler().postDelayed(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						// 190726 yhr
+			        	SystemProperties.set("tcc.mtx.power.key.skip", "false");
+					}
+				}, 6000);
+	        	
+	        	
+	        	intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+	        	startActivity(intent);
+	        }
+		}
+	};
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_gps);
+		
+		mIndex = getIntent().getIntExtra("_key", 0);
+		String[] _str = getResources().getStringArray(R.array.arListTitle);
+		
+		View _view = (View) findViewById(R.id.top);
+		
+		mTitle = (TextView) _view.findViewById(R.id.tv_title);
+		mTitle.setText(_str[mIndex]);
+		mTitle.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View arg0, MotionEvent arg1) {
+				// TODO Auto-generated method stub
+				if(arg1.getAction() == MotionEvent.ACTION_DOWN) {
+					mHandler.postDelayed(mRunnable, 5000);
+				} else if(arg1.getAction() == MotionEvent.ACTION_UP){
+					mHandler.removeCallbacks(mRunnable);
+				}
+				return false;
+			}
+		});
+		
+		mResultOK = (Button) _view.findViewById(R.id.bt_result_ok);
+		mResultOK.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				MainActivity.getInstace().mSetResult(mIndex, MD_DEFINE.RESULT_OK);
+				//onBackPressed();
+				finish();
+			}
+		});
+		mResultOK.setEnabled(false);
+		
+		mResultNG = (Button) _view.findViewById(R.id.bt_result_ng);
+		mResultNG.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				MainActivity.getInstace().mSetResult(mIndex, MD_DEFINE.RESULT_NG);
+//				onBackPressed();
+				finish();
+			}
+		});
+		((TextView)_view.findViewById(R.id.tv_body)).setText(R.string.str_gps_body);
+		
+//		try {
+//			HMS_SERVICE.mDataTransmit(HMSIndex.CMD_H_LCD_POWER_ONOFF, HMSIndex.CMD_L_LCD_POWER_ONOFF, new byte[] {0x00});
+//		} catch (RemoteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+//		((TextView)findViewById(R.id.tv_report)).setVisibility(View.INVISIBLE);
+//		((TextView)findViewById(R.id.tv_report1)).setVisibility(View.INVISIBLE);
+//		
+//		((Button)findViewById(R.id.btn_test)).setText(R.string.str_gps_btn);
+//		((Button)findViewById(R.id.btn_test)).setEnabled(true);
+//		((Button)findViewById(R.id.btn_test)).setVisibility(View.VISIBLE);
+//		((Button)findViewById(R.id.btn_test)).setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View arg0) {
+//				// TODO Auto-generated method stub
+//				Intent intent = getPackageManager().getLaunchIntentForPackage("com.ublox.ucenter");
+//		        if(intent != null)
+//		        {
+//		        	intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+//		        	startActivity(intent);
+//		        }
+//			}
+//		});
+		
+        locManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, INTERVAl_TIME, INTERVAl_DIS, this);                        
+        locManager.addGpsStatusListener(gpsStatusListener);
+        locManager.addNmeaListener(gpsStatusNmeaListener);
+        
+        mGetView();
+	}
+	
+	Handler mHandlerOKEnable = new Handler();
+	Runnable mRunnableOKEnable = new Runnable() {
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			mResultOK.setEnabled(true);
+		}
+	};
+	@Override
+	protected void onResume() {
+		
+		mHandlerOKEnable.postDelayed(mRunnableOKEnable, _DEFINE.OK_ENABLE_TIME);
+		
+		// 190726 yhr
+    	SystemProperties.set("tcc.mtx.power.key.skip", "true");
+		
+		super.onResume();
+	};
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		mHandlerOKEnable.removeCallbacks(mRunnableOKEnable);
+		locManager.removeGpsStatusListener(gpsStatusListener);
+        locManager.removeNmeaListener(gpsStatusNmeaListener);
+        
+		super.onPause();
+	}
+
+	@Override
+	public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+	//	super.onBackPressed();
+	}
+	
+	//------------------GPS
+    private final String GPS_TAG = "Gps tag"; 
+    public final static long INTERVAl_TIME = 500;
+    public final static float INTERVAl_DIS = 0f;
+
+
+    private GpsStatus mGpsStatus;
+   
+    private LocationManager locManager;
+    private Iterable<GpsSatellite>  itGpsStatellites;
+
+	// gpsstatuslistener
+	private final GpsStatus.Listener gpsStatusListener = new GpsStatus.Listener() {
+		public void onGpsStatusChanged(int event) {
+			switch (event) {
+			case GpsStatus.GPS_EVENT_STARTED:
+
+				Log.e(GPS_TAG, String.valueOf(event) + "---GPS_EVENT_STARTED");
+				break;
+
+			case GpsStatus.GPS_EVENT_STOPPED:
+				Log.e(GPS_TAG, String.valueOf(event) + "---GPS_EVENT_STOPPED");
+				break;
+			case GpsStatus.GPS_EVENT_FIRST_FIX:
+				Log.e(GPS_TAG, String.valueOf(event) + "---GPS_EVENT_FIRST_FIX");
+				break;
+
+			case GpsStatus.GPS_EVENT_SATELLITE_STATUS:
+
+				mGpsStatus = locManager.getGpsStatus(null);
+
+				itGpsStatellites = mGpsStatus.getSatellites();
+				Iterator<GpsSatellite> it = itGpsStatellites.iterator();
+				int iPos = 0;
+				while (it.hasNext()) {
+					GpsSatellite gpsS = (GpsSatellite) it.next();
+					// gpsInfo.iID[iPos] = gpsS.getPrn();
+					// gpsInfo.iAzimuth[iPos] = (int)gpsS.getAzimuth();
+					// gpsInfo.iElevation[iPos] =(int)gpsS.getElevation();
+					// gpsInfo.iSN[iPos] = (int)gpsS.getSnr();
+					iPos++;
+				}
+				// gpsInfo.iStateNum = iPos;
+				// mGpsHandler.setGpsInfo(gpsInfo);
+				Log.e(GPS_TAG, String.valueOf(event) + "---GPS_EVENT_SATELLITE_STATUS");
+				break;
+			default:
+				break;
+			}
+		}
+	};
+	String arName[] = new String[20];
+	String arData[] = new String[20];
+	int gps_index = -1;
+    private final GpsStatus.NmeaListener gpsStatusNmeaListener = new GpsStatus.NmeaListener(){
+
+        public void onNmeaReceived(long timestamp, String nmea) {
+            // TODO Auto-generated method stub
+//             Log.e(GPS_TAG,nmea);
+        	if(nmea.contains("$GPGSV")) {
+        		String[] txtArr = nmea.split(",") ;
+        		if(txtArr[2].equals(String.valueOf(1))) {
+        			gps_index =0;
+        			for(int i=0; i<20; i++) {
+        				arName[i] = "";
+        				arData[i] = "";
+        			}
+        		}
+        		if(gps_index < 0) return;
+        		
+        		for(int i=4; i<txtArr.length-3; i+=4) {
+        			String [] _data = txtArr[i+3].split("\\*");
+        			arName[gps_index] = txtArr[i];
+        			arData[gps_index] = _data[0];
+        			gps_index ++;
+        		}
+        		
+        		if(txtArr[1].equals(txtArr[2]))	{
+        			mUpdateView();
+        		}
+        	}
+        }
+    };
+
+
+    public void onLocationChanged(Location arg0) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void onProviderDisabled(String provider) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void onProviderEnabled(String provider) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        // TODO Auto-generated method stub
+        
+    }
+    
+    void mGetView() {
+    	mTV_State = (TextView) findViewById(R.id.tv_state);
+    	mTV_State.setTextSize(21);
+    	mUpdateState(0,0, 0, 0);
+    	
+     	arNumber[0] = (TextView) findViewById(R.id.txt01);
+    	arNumber[1] = (TextView) findViewById(R.id.txt02);
+    	arNumber[2] = (TextView) findViewById(R.id.txt03);
+    	arNumber[3] = (TextView) findViewById(R.id.txt04);
+    	arNumber[4] = (TextView) findViewById(R.id.txt05);
+    	arNumber[5] = (TextView) findViewById(R.id.txt06);
+    	arNumber[6] = (TextView) findViewById(R.id.txt07);
+    	arNumber[7] = (TextView) findViewById(R.id.txt08);
+    	arNumber[8] = (TextView) findViewById(R.id.txt09);
+    	arNumber[9] = (TextView) findViewById(R.id.txt10);
+    	arNumber[10] = (TextView) findViewById(R.id.txt11);
+    	arNumber[11] = (TextView) findViewById(R.id.txt12);
+    	arNumber[12] = (TextView) findViewById(R.id.txt13);
+    	arNumber[13] = (TextView) findViewById(R.id.txt14);
+    	arNumber[14] = (TextView) findViewById(R.id.txt15);
+    	arNumber[15] = (TextView) findViewById(R.id.txt16);
+    	arNumber[16] = (TextView) findViewById(R.id.txt17);
+    	arNumber[17] = (TextView) findViewById(R.id.txt18);
+    	arNumber[18] = (TextView) findViewById(R.id.txt19);
+    	arNumber[19] = (TextView) findViewById(R.id.txt20);
+    	
+    	arbar[0] = (TextView) findViewById(R.id.tv_seek01);
+    	arbar[1] = (TextView) findViewById(R.id.tv_seek02);
+    	arbar[2] = (TextView) findViewById(R.id.tv_seek03);
+    	arbar[3] = (TextView) findViewById(R.id.tv_seek04);
+    	arbar[4] = (TextView) findViewById(R.id.tv_seek05);
+    	arbar[5] = (TextView) findViewById(R.id.tv_seek06);
+    	arbar[6] = (TextView) findViewById(R.id.tv_seek07);
+    	arbar[7] = (TextView) findViewById(R.id.tv_seek08);
+    	arbar[8] = (TextView) findViewById(R.id.tv_seek09);
+    	arbar[9] = (TextView) findViewById(R.id.tv_seek10);
+    	arbar[10] = (TextView) findViewById(R.id.tv_seek11);
+    	arbar[11] = (TextView) findViewById(R.id.tv_seek12);
+    	arbar[12] = (TextView) findViewById(R.id.tv_seek13);
+    	arbar[13] = (TextView) findViewById(R.id.tv_seek14);
+    	arbar[14] = (TextView) findViewById(R.id.tv_seek15);
+    	arbar[15] = (TextView) findViewById(R.id.tv_seek16);
+    	arbar[16] = (TextView) findViewById(R.id.tv_seek17);
+    	arbar[17] = (TextView) findViewById(R.id.tv_seek18);
+    	arbar[18] = (TextView) findViewById(R.id.tv_seek19);
+    	arbar[19] = (TextView) findViewById(R.id.tv_seek20);
+    	
+    	arValue[0] = (TextView) findViewById(R.id.tv_value01);
+    	arValue[1] = (TextView) findViewById(R.id.tv_value02);
+    	arValue[2] = (TextView) findViewById(R.id.tv_value03);
+    	arValue[3] = (TextView) findViewById(R.id.tv_value04);
+    	arValue[4] = (TextView) findViewById(R.id.tv_value05);
+    	arValue[5] = (TextView) findViewById(R.id.tv_value06);
+    	arValue[6] = (TextView) findViewById(R.id.tv_value07);
+    	arValue[7] = (TextView) findViewById(R.id.tv_value08);
+    	arValue[8] = (TextView) findViewById(R.id.tv_value09);
+    	arValue[9] = (TextView) findViewById(R.id.tv_value10);
+    	arValue[10] = (TextView) findViewById(R.id.tv_value11);
+    	arValue[11] = (TextView) findViewById(R.id.tv_value12);
+    	arValue[12] = (TextView) findViewById(R.id.tv_value13);
+    	arValue[13] = (TextView) findViewById(R.id.tv_value14);
+    	arValue[14] = (TextView) findViewById(R.id.tv_value15);
+    	arValue[15] = (TextView) findViewById(R.id.tv_value16);
+    	arValue[16] = (TextView) findViewById(R.id.tv_value17);
+    	arValue[17] = (TextView) findViewById(R.id.tv_value18);
+    	arValue[18] = (TextView) findViewById(R.id.tv_value19);
+    	arValue[19] = (TextView) findViewById(R.id.tv_value20);
+    }
+    
+    void mUpdateView() {
+    	int _fix = 0, _all = 0, _cnt = 0, _sum=0;
+    	for(int i=0; i<20; i++) {
+    		if(arName[i].length() < 0) {
+    			arValue[i].setText("");
+    			arNumber[i].setText("");
+    			LayoutParams params = (LayoutParams) arbar[i].getLayoutParams();
+    			params.height = 0;
+    			arbar[i].setLayoutParams(params);
+    		} else {
+	    		arValue[i].setText(arData[i]);
+	    		if(arValue[i].length() > 0) {
+	    			_fix++;
+	    			
+	    			LayoutParams params = (LayoutParams) arbar[i].getLayoutParams();
+	    			params.height = Integer.parseInt(arData[i]);
+	    			arbar[i].setLayoutParams(params);
+	    			
+	    			if(params.height >= 30 ) {
+	    				_cnt++;
+	    				_sum = _sum + params.height;
+	    			}
+	    		} else {
+	    			LayoutParams params = (LayoutParams) arbar[i].getLayoutParams();
+	    			params.height = 0;
+	    			arbar[i].setLayoutParams(params);
+	    		}
+	    		arNumber[i].setText(arName[i]);
+    		}
+    	}
+//    	Log.d("debug", "==========> " + _sum + "   " + _cnt);
+//    	if(_sum == 0) _sum = 1;
+    	mUpdateState(_fix, gps_index, _cnt, _cnt == 0 ? 0 : _sum/_cnt);
+    }
+    void mUpdateState(int _fix, int _all, int _cnt, int _arv) {
+    	String _str = getString(R.string.str_gps_state);
+    	_str = _str.replace("!a", SystemProperties.get(PROPERTIES_GPS_VERSION, ""));
+    	_str = _str.replace("%s", Integer.toString(_fix));
+    	_str = _str.replace("#s", Integer.toString(_all));
+    	_str = _str.replace("@s", Integer.toString(_cnt));
+    	_str = _str.replace("!s", Integer.toString(_arv));
+		
+    	mTV_State.setText(_str);
+    }
+}

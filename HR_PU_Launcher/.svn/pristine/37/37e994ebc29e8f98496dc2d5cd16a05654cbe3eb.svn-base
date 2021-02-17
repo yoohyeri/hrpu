@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MA_HPRearCamera</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <string name="noti_msg">위험! 후진 시 후방 및 좌우를 확인하세요.</string>
+    <string name="sdcard_rebooting_msg">내비게이션을 사용하려면 메모리카드를 삽입해주세요.\n잠시 후 시스템이 재시작 됩니다.</string>
+</resources>

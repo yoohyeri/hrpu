@@ -1,0 +1,182 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="peace.tabbutton.Fragment1" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:id="@+id/systemfullversionlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp" >
+
+            <!-- 현재 버전 -->
+
+            <LinearLayout
+                android:id="@+id/llfullCurrentVer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/font_20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:text="@string/update_current_ver" />
+
+                <TextView
+                    android:id="@+id/currentfullVersion"
+                    style="@style/font_20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center" />
+            </LinearLayout>
+
+            <!-- 최신버전 -->
+
+            <LinearLayout
+                android:id="@+id/llfullNewVer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/font_20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:text="@string/update_new_ver" />
+
+                <TextView
+                    android:id="@+id/newfullVersion"
+                    style="@style/font_20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/systemversionlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp" >
+
+            <!-- 현재 버전 -->
+
+            <LinearLayout
+                android:id="@+id/llCurrentVer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/font_26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:text="@string/update_current_ver" />
+
+                <TextView
+                    android:id="@+id/currentVersion"
+                    style="@style/font_24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center" />
+            </LinearLayout>
+
+            <!-- 최신버전 -->
+
+            <LinearLayout
+                android:id="@+id/llNewVer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    style="@style/font_26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:text="@string/update_new_ver" />
+
+                <TextView
+                    android:id="@+id/newVersion"
+                    style="@style/font_24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fullupdateBtnLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/FullUpdateRequestMsg"
+                style="@style/font_28"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="40dp"
+                android:text="@string/update_msg" />
+        
+            <TextView
+                android:id="@+id/fullbtnUpdate"
+                style="@style/font_28"
+                android:layout_width="194dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/btn_2"
+                android:gravity="center"
+                android:text="@string/update_btn" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/updateBtnLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
+            android:gravity="center"
+            android:orientation="vertical" >
+            
+            <TextView
+                android:id="@+id/UpdateRequestMsg"
+                style="@style/font_28"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/update_msg" />
+
+            <TextView
+                android:id="@+id/btnUpdate"
+                style="@style/font_28"
+                android:layout_width="194dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="70dp"
+                android:background="@drawable/btn_2"
+                android:gravity="center"
+                android:text="@string/update_btn" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>

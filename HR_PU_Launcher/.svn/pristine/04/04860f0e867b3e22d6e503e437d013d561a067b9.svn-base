@@ -1,0 +1,123 @@
+package com.mobilusauto.app.productionprocess;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.mobilusauto.app.productionprocess.R;
+
+import android.app.Activity;
+import android.bluetooth.BluetoothA2dp;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothProfile;
+import android.bluetooth.BluetoothUuid;
+import android.bluetooth.BluetoothProfile.ServiceListener;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.HMSIndex;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.media.*;
+import android.media.AudioManager.OnAudioFocusChangeListener;
+import android.media.MediaRecorder.*;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IHMSCommunicationService;
+import android.os.IYPService;
+import android.os.Message;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.SystemProperties;
+import android.util.Log;
+import android.view.*;
+import android.view.View.OnClickListener;
+import android.widget.*;
+import android.widget.RelativeLayout.LayoutParams;
+
+public class RadioInputActivity extends Activity implements OnClickListener{
+	private TextView mTitle;
+	private Button mResultOK, mResultNG;
+	private int mIndex;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_common);
+		
+		mIndex = getIntent().getIntExtra("_key", 0);
+		String[] _str = getResources().getStringArray(R.array.arListTitle);
+		
+		View _view = (View) findViewById(R.id.top);
+		
+		mTitle = (TextView) _view.findViewById(R.id.tv_title);
+		mTitle.setText(_str[mIndex]);
+		
+		mResultOK = (Button) _view.findViewById(R.id.bt_result_ok);
+		mResultOK.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				MainActivity.getInstace().mSetResult(mIndex, MD_DEFINE.RESULT_OK);
+				//onBackPressed();
+				finish();
+			}
+		});
+		mResultOK.setEnabled(false);
+		
+		mResultNG = (Button) _view.findViewById(R.id.bt_result_ng);
+		mResultNG.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				MainActivity.getInstace().mSetResult(mIndex, MD_DEFINE.RESULT_NG);
+//				onBackPressed();
+				finish();
+			}
+		});
+		((TextView)_view.findViewById(R.id.tv_body)).setText(R.string.str_radio_body);
+		
+//		try {
+//			HMS_SERVICE.mDataTransmit(HMSIndex.CMD_H_LCD_POWER_ONOFF, HMSIndex.CMD_L_LCD_POWER_ONOFF, new byte[] {0x00});
+//		} catch (RemoteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+	}
+	
+	Handler mHandlerOKEnable = new Handler();
+	Runnable mRunnableOKEnable = new Runnable() {
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			mResultOK.setEnabled(true);
+		}
+	};
+	@Override
+	protected void onResume() {
+		
+		mHandlerOKEnable.postDelayed(mRunnableOKEnable, _DEFINE.OK_ENABLE_TIME);
+		
+		super.onResume();
+	};
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		mHandlerOKEnable.removeCallbacks(mRunnableOKEnable);
+		super.onPause();
+	}
+
+	@Override
+	public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+	//	super.onBackPressed();
+	}
+}

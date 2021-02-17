@@ -1,0 +1,73 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    
+    <!-- Status Bar -->
+    <dimen name="status_bar_height">55dp</dimen>
+    <dimen name="navi_h">55dp</dimen>
+    <dimen name="title_bar_h">55dp</dimen>
+
+    <!-- Launcher -->
+    <dimen name="launcher_map_w">393dp</dimen>
+    <dimen name="launcher_map_h">395dp</dimen>
+    
+    <dimen name="launcher_dmb_w">389dp</dimen>
+    <dimen name="launcher_dmb_h">262dp</dimen>
+    
+    <dimen name="launcher_btn_w">167dp</dimen>
+    <dimen name="launcher_btn_h">55dp</dimen>
+    
+    
+    <!-- HDDMB -->
+    <dimen name="channel_name_w">415dp</dimen>
+    <dimen name="title_bar_btn_w">84dp</dimen>
+    <dimen name="title_bar_btn_h">53dp</dimen>
+    
+    <dimen name="bottom_bar_btn_w">262dp</dimen>
+    <dimen name="bottom_bar_btn_h">59dp</dimen>
+
+    <dimen name="popup_w">540dp</dimen>
+    <dimen name="popup_h">143dp</dimen>
+	<dimen name="popup_btn_w">246dp</dimen>
+    <dimen name="popup_btn_h">59dp</dimen>
+    
+    <dimen name="default_popup_w">600dp</dimen>
+    <dimen name="default_popup_h">320dp</dimen>
+    <dimen name="default_large_popup_w">720dp</dimen>
+    <dimen name="default_large_popup_h">410dp</dimen>
+    
+    <dimen name="update_popup_w">760dp</dimen>
+    <dimen name="update_popup_h">440dp</dimen>
+    
+    <dimen name="default_popup_btn_w">296dp</dimen>
+    <dimen name="default_popup_btn_h">59dp</dimen>
+    
+    <dimen name="scan_popup_btn_w">170dp</dimen>
+    <dimen name="scan_popup_btn_h">59dp</dimen>
+    
+    <dimen name="power_popup_w">600dp</dimen>
+    <dimen name="power_popup_h">320dp</dimen>
+    
+    <!--Setting -->
+    <dimen name="status_bar_h">55dp</dimen>
+    
+    <dimen name="btn_default_w">202dp</dimen>
+    <dimen name="btn_default_h">57dp</dimen>
+
+    <dimen name="list_w">260dp</dimen>
+    <dimen name="list_h">74dp</dimen>
+    
+    <dimen name="btn_time_w">74dp</dimen>
+    <dimen name="btn_time_h">51dp</dimen>
+    
+    <dimen name="set_scrollbar_w">314dp</dimen>
+    <dimen name="set_scrollbar_h">8dp</dimen>
+    
+    <dimen name="btn_screen_saver_w">170dp</dimen>
+    <dimen name="btn_screen_saver_h">204dp</dimen>
+   
+    <!--  CAS -->
+    <dimen name="cas_debug_text_height">40dp</dimen>
+    <dimen name="cas_debug_text_size">20sp</dimen>
+    
+</resources>

@@ -1,0 +1,24 @@
+﻿  stdafx.cpp
+  MFCsrialport.cpp
+  MFCsrialportDlg.cpp
+MFCsrialportDlg.cpp(268): error C2664: 'int ATL::CStringT<wchar_t,StrTraitMFC_DLL<wchar_t,ATL::ChTraitsCRT<wchar_t>>>::Replace(const wchar_t *,const wchar_t *)': 인수 1을(를) 'const char [2]'에서 'wchar_t'(으)로 변환할 수 없습니다.
+  MFCsrialportDlg.cpp(268): note: 이 변환이 가능한 컨텍스트가 없습니다.
+MFCsrialportDlg.cpp(269): error C2664: 'int ATL::CStringT<wchar_t,StrTraitMFC_DLL<wchar_t,ATL::ChTraitsCRT<wchar_t>>>::Replace(const wchar_t *,const wchar_t *)': 인수 1을(를) 'const char [2]'에서 'wchar_t'(으)로 변환할 수 없습니다.
+  MFCsrialportDlg.cpp(269): note: 이 변환이 가능한 컨텍스트가 없습니다.
+MFCsrialportDlg.cpp(380): error C2440: '초기화 중': 'const char [1]'에서 'ATL::CStringT<wchar_t,StrTraitMFC_DLL<wchar_t,ATL::ChTraitsCRT<wchar_t>>>'(으)로 변환할 수 없습니다.
+  MFCsrialportDlg.cpp(380): note: class 'ATL::CStringT<wchar_t,StrTraitMFC_DLL<wchar_t,ATL::ChTraitsCRT<wchar_t>>>'의 생성자가 'explicit'으로 선언되었습니다.
+MFCsrialportDlg.cpp(395): error C2664: 'int ATL::CStringT<wchar_t,StrTraitMFC_DLL<wchar_t,ATL::ChTraitsCRT<wchar_t>>>::Replace(const wchar_t *,const wchar_t *)': 인수 1을(를) 'const char [2]'에서 'wchar_t'(으)로 변환할 수 없습니다.
+  MFCsrialportDlg.cpp(395): note: 이 변환이 가능한 컨텍스트가 없습니다.
+MFCsrialportDlg.cpp(403): warning C4477: 'printf' : 서식 문자열 '%s'에 'char *' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'CString'입니다.
+MFCsrialportDlg.cpp(413): warning C4477: 'printf' : 서식 문자열 '%s'에 'char *' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'CString'입니다.
+MFCsrialportDlg.cpp(489): error C2664: 'LSTATUS RegOpenKeyExW(HKEY,LPCWSTR,DWORD,REGSAM,PHKEY)': 인수 2을(를) 'const char [30]'에서 'LPCWSTR'(으)로 변환할 수 없습니다.
+  MFCsrialportDlg.cpp(489): note: 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+MFCsrialportDlg.cpp(496): error C2664: 'LSTATUS RegEnumValueW(HKEY,DWORD,LPWSTR,LPDWORD,LPDWORD,LPDWORD,LPBYTE,LPDWORD)': 인수 3을(를) 'char [260]'에서 'LPWSTR'(으)로 변환할 수 없습니다.
+  MFCsrialportDlg.cpp(496): note: 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+MFCsrialportDlg.cpp(502): error C2664: 'LSTATUS RegQueryValueExW(HKEY,LPCWSTR,LPDWORD,LPDWORD,LPBYTE,LPDWORD)': 인수 2을(를) 'char [260]'에서 'LPCWSTR'(으)로 변환할 수 없습니다.
+  MFCsrialportDlg.cpp(502): note: 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+MFCsrialportDlg.cpp(506): error C2664: 'int CComboBox::AddString(LPCTSTR)': 인수 1을(를) 'char [260]'에서 'LPCTSTR'(으)로 변환할 수 없습니다.
+  MFCsrialportDlg.cpp(506): note: 가리킨 형식이 관련이 없습니다. 변환하려면 reinterpret_cast, C 스타일 캐스트 또는 함수 스타일 캐스트가 필요합니다.
+MFCsrialportDlg.cpp(529): error C2039: 'SetWindowTextA': 'CWnd'의 멤버가 아닙니다.
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\include\afxwin.h(2176): note: 'CWnd' 선언을 참조하십시오.
+  Mycomm.cpp

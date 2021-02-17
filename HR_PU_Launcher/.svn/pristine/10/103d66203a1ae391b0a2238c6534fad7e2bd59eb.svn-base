@@ -1,0 +1,28 @@
+package com.mdstec.android.tpeg;
+
+import com.mdstec.android.tpeg.decoder.TpegService;
+
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+
+public class TpegServiceManager extends BroadcastReceiver {
+	private static final String TAG = TpegService.class.getName();
+
+	@Override
+	public void onReceive(Context arg0, Intent arg1) {
+		// TODO Auto-generated method stub
+		if (arg1.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
+			ComponentName svcName = arg0.startService(new Intent(arg0, TpegService.class));
+		      if (svcName == null) {
+		        Log.e(TAG, "Could not start service.");
+		      }
+		    } else {
+		      Log.e(TAG, "Received unexpected intent " + arg1.toString());
+	    }
+
+	}
+
+}

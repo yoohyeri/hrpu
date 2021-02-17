@@ -1,0 +1,7 @@
+package com.mobilusauto.app.productionprocess;
+
+public class MD_DEFINE {
+	public final static String RESULT_OK	= "OK";
+	public final static String RESULT_NG	= "NG";
+	public final static String RESULT_NA	= "NA";
+}

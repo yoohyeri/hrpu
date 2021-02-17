@@ -1,0 +1,178 @@
+<FrameLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="peace.tabbutton.Fragment1" >
+
+    <!-- 자동 밝기 -->
+
+    <RelativeLayout
+        android:id="@+id/rlAutoBrightNess"
+        android:layout_width="match_parent"
+        android:layout_height="93dp"
+        android:background="@drawable/_kia_lcd_list_item"
+        android:paddingLeft="36dp"
+        android:gravity="left|center" >
+
+        <TextView
+            android:id="@+id/selectParkingline"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/llAutoBrightness"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:gravity="left|center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/checkBoxParkingline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/kia_check_off" />
+
+            <TextView
+                android:id="@+id/txtParkingline"
+                style="@style/font_28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/activation" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/msgAutoBrightness"
+            style="@style/font_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/llAutoBrightness"
+            android:layout_marginTop="4dp"
+            android:paddingLeft="42dp"
+            android:singleLine="true"
+            android:text="@string/msg_activation" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/vehicleTypeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="93dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line" />
+
+        <!-- 주간 모드 -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="83dp"
+            android:background="@drawable/_kia_lcd_list_item"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/select1t2w"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/_kia_lcd_list_item" />
+
+            <LinearLayout
+                android:id="@+id/ll_1t2w"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:orientation="horizontal"
+                android:paddingLeft="42dp" >
+
+                <TextView
+                    android:id="@+id/radioBtn1t2w"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/kia_radio_on" />
+
+                <TextView
+                    android:id="@+id/txt1t2w"
+                    style="@style/font_28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/vehicle_1t_2w" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/msg1t2w"
+                style="@style/font_20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_1t2w"
+                android:paddingLeft="42dp"
+                android:singleLine="true"
+                android:visibility="gone"
+                android:text="@string/msg_day_mode" />
+        </RelativeLayout>
+
+        <!-- 야간 모드 -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="83dp"
+            android:background="@drawable/_kia_lcd_list_item"
+            android:gravity="left|center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/select1t4w"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/_kia_lcd_list_item" />
+
+            <LinearLayout
+                android:id="@+id/ll_1t4w"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left|center"
+                android:orientation="horizontal"
+                android:paddingLeft="42dp" >
+
+                <TextView
+                    android:id="@+id/radioBtn1t4w"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/kia_radio_off" />
+
+                <TextView
+                    android:id="@+id/txt1t4w"
+                    style="@style/font_28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/vehicle_1t_4w" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/msg1t4w"
+                style="@style/font_20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_1t4w"
+                android:paddingLeft="42dp"
+                android:singleLine="true"
+                android:visibility="gone"
+                android:text="@string/msg_night_mode" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line" />
+
+        <!-- 화면 밝기 -->
+
+        
+    </LinearLayout>
+
+</FrameLayout>

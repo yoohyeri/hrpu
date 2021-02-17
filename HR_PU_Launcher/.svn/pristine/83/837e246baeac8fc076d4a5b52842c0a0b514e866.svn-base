@@ -1,0 +1,14 @@
+package com.mobilusauto.app.productionprocess;
+
+public interface OnDVDProtocal {
+	/**
+	 * DVD Deck의 Mechanism 상태가 변경되면 호출된다.
+	 * @param state
+	 * @see MechanismState
+	 */
+	
+	public void onDVDKeyState(String key, String action);
+	
+	public void onDVDDeckVer(String value);
+	public void onDVDFWVer(String value);
+}

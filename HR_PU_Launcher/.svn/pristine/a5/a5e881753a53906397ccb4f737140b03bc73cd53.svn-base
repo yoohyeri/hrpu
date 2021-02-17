@@ -1,0 +1,200 @@
+/*
+ * Copyright 2009 Cedric Priscal
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. 
+ */
+
+package android_serialport_api;
+import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.security.InvalidParameterException;
+import java.util.ArrayList;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android_serialport_api.sample.Application;
+
+
+public abstract class ThreadRead extends Thread{
+
+	private InputStream mInputStream;
+
+	public ThreadRead(SerialPort mSerialPort) throws SecurityException, IOException {
+		try {
+			Log.d("debug", "=>> ThreadRead onCreate ");
+			mInputStream = mSerialPort.getInputStream();
+
+			/* Create a receiving thread */
+		} catch (SecurityException e) {
+			Log.d("debug", "==> Error : " + e.toString());
+		} catch (InvalidParameterException e) {
+			Log.d("debug", "==> Error : " + e.toString());
+		}
+	}
+
+	byte[] buffer = new byte[255];
+	@Override
+	public void run() {
+		super.run();
+		while(!isInterrupted()) {
+			int size;
+			try {
+				if (mInputStream == null) {
+					return;
+				}
+				size = mInputStream.read(buffer);
+				if (size > 0) {
+					parsing(buffer, size);
+
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+				return;
+			}
+		}
+	}
+	
+	
+	
+	
+	private final byte PACKET_SOP                              = (byte)0xAA;
+    private final byte PACKET_EOP                              = (byte)0x55;
+    private final byte PACKET_TYPE_NORMAL                      = (byte)0x01;
+	boolean bSOP = false;
+	boolean bLength = false;
+	boolean bLength2 = false;
+	int nLength = 0;
+	int nType = 0;
+	ArrayList<Byte> mPacket = new ArrayList<Byte>();
+		
+	public void parsing(byte[] arg0, int size) {
+//		public void onReceive(byte[] arg0) throws RemoteException {
+		// TODO Auto-generated method stub
+		byte[] buf = arg0;
+		
+			toHexString("[recv]", buf);
+		for(int i=0; i<size; i++) {
+            if(bSOP == false) {
+                if(buf[i] == (byte)PACKET_SOP) {
+                    bSOP = true;
+                    bLength = false;
+                    nType = nLength = 0;
+                    mPacket.clear();
+                    mPacket.add(buf[i]);
+                }
+            } else if(nType == 0) {
+                switch(buf[i]) {
+                    case PACKET_TYPE_NORMAL:
+                        nType = buf[i];
+                        mPacket.add(buf[i]);
+                        break;
+                    default:
+                        nType = nLength = 0;
+                        bLength = bSOP = false;
+                        break;
+                }
+            } else if(bLength == false) {
+                bLength = true;
+                nLength = buf[i];
+                mPacket.add(buf[i]);
+            } else {
+                mPacket.add(buf[i]);
+                if(mPacket.size() - 4 >= nLength) {
+                    if(mPacket.get(nLength+2) == (byte)MakeCRC(mPacket)) {
+//                            if(DEBUG) Log.d(TAG, "Recv - Type: " + mPacket.get(1) + " Len: " + mPacket.get(2) + " CMD-H: " + mPacket.get(3) + " CMD-L: " + mPacket.get(4));
+                    	
+                        switch (mPacket.get(1)) {
+                            case PACKET_TYPE_NORMAL:
+                                byte[] data = new byte[mPacket.get(2)-3];
+                                for(int index = 5; index < mPacket.size()-2; index++)
+                                    data[index-5] = mPacket.get(index);
+//                                    mOnParsingNormalPacket.onRecvPacket(mPacket.get(3), mPacket.get(4), data);
+                                onDataReceived(mPacket.get(3), mPacket.get(4), data);
+//                                    DEBUG_.toHexString("[pp]", data);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else {
+//                            if(DEBUG) {
+//                                Log.d(TAG, "Packet Checksum Error");
+//                                String str = "Recv : ";
+//                                for(int k = 0; k < mPacket.size(); k++)
+//                                    str += String.format("%02X " , (byte)mPacket.get(k));
+//                                Log.d(TAG, str);
+//                            }
+                    }
+                    bSOP = bLength = false;
+                    nType = nLength = 0;
+                }
+            }
+		}
+	}
+	
+	private byte MakeCRC(ArrayList<Byte> buf) {
+        int ret = 0;
+        int sum = 0;
+        if(buf.size() < 3)
+            return -1;
+
+        for(int i = 0; i < buf.get(2); i++)
+            sum = (sum + (byte)buf.get(i+2)) & 0xFF;
+
+        ret = ~(sum) & 0xFF;
+        return (byte)ret;
+    }
+	
+//	private void DisplayError(int resourceId) {
+//		AlertDialog.Builder b = new AlertDialog.Builder(this);
+//		b.setTitle("Error");
+//		b.setMessage(resourceId);
+//		b.setPositiveButton("OK", new OnClickListener() {
+//			public void onClick(DialogInterface dialog, int which) {
+//				SerialPortActivity.this.finish();
+//			}
+//		});
+//		b.show();
+//	}
+
+
+
+//	protected abstract void onDataReceived(final byte[] buffer);
+	protected abstract void onDataReceived(byte _cmd1, byte _cmd2, byte[] buffer);
+//	@Override
+//	protected void onDestroy() {
+//		if (mReadThread != null)
+//			mReadThread.interrupt();
+//		mApplication.closeSerialPort();
+//		mSerialPort = null;
+//		super.onDestroy();
+//	}
+	
+	public static void toHexString(String _tag, byte buf[]){
+	      StringBuffer sb = new StringBuffer();
+	      for (int i = 0; i < buf.length; i++) {
+	          sb.append(Integer.toHexString(0x0100 + (buf[i] & 0x00FF)).substring(1));
+	          sb.append(" ");
+	      }
+	      Log.d("debug", "==========> " + _tag + " : "+ sb.toString());
+	  }
+}

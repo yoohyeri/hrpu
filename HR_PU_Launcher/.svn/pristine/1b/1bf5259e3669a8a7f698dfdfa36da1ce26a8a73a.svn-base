@@ -1,0 +1,115 @@
+
+// MFCsrialportDlg.h : 헤더 파일
+//
+
+#pragma once
+#include "afxwin.h"
+#include "Mycomm.h"
+//#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+const byte CMD1_VALUE = (byte)0x01;
+
+const byte CMD_SET_BARCODE = (byte)0x00;
+const byte CMD_SET_CAS_ID = (byte)0x01;
+const byte CMD_SET_REPORT = (byte)0x02;
+
+const byte CMD2_GET_SERIAL = (byte)0x20;
+const byte CMD2_GET_CAS_ID = (byte)0x21;
+
+const byte CMD_SET_CONNECT = (byte)0xAA;
+#define MY_TIMER 100
+
+
+
+
+// CMFCsrialportDlg 대화 상자
+class CMFCsrialportDlg : public CDialogEx
+{
+// 생성입니다.
+public:
+	CMFCsrialportDlg(CWnd* pParent = NULL);	// 표준 생성자입니다.
+	
+	CMycomm* m_comm;
+	LRESULT onThreadClosed(WPARAM length, LPARAM lpara);
+	LRESULT onReceive(WPARAM length, LPARAM lpara);
+
+// 대화 상자 데이터입니다.
+#ifdef AFX_DESIGN_TIME
+	enum { IDD = IDD_MFCSRIALPORT_DIALOG };
+#endif
+
+	protected:
+	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 지원입니다.
+
+
+// 구현입니다.
+protected:
+	HICON m_hIcon;
+
+	// 생성된 메시지 맵 함수
+	virtual BOOL OnInitDialog();
+	afx_msg void OnPaint();
+	afx_msg HCURSOR OnQueryDragIcon();
+	DECLARE_MESSAGE_MAP()
+public:
+	BOOL comport_state;
+	CComboBox m_combo_comport_list;
+	CString m_str_comport;
+	CComboBox m_combo_baudrate_list;
+	CString m_str_baudrate;
+	CEdit m_edit_rcv_view;
+	CEdit m_edit_send_data;
+	afx_msg void OnCbnSelchangeComboComport();
+	afx_msg void OnBnClickedBtConnect();
+	afx_msg void OnCbnSelchangeComboBaudrate();
+	afx_msg void OnBnClickedBtClear();
+	afx_msg void OnBnClickedBtSend();
+
+	void mSendData(byte _data[]);
+	void parsing(char *arg0, int size);
+	byte MakeCRC();
+	void mUpdateList(byte _cmd1, byte _cmd2, byte * dataz, int size);
+	afx_msg void OnEnChangeEditSendData();
+	afx_msg void OnUpdateEditSendData();
+
+
+	CEdit *pEdit_send_data;
+	void mGetSerialPort();
+	
+	afx_msg void OnKillfocusEditSendData();
+	afx_msg void OnBnClickedBtSendClear();
+
+	BOOL mUartConnect;
+
+	afx_msg  void OnTimer(UINT_PTR nIDEvent);
+	void mUpdateConnect();
+	BOOL myUtil_CheckDir(CString sDirName);
+	afx_msg void OnBnClickedBtGetCasFile();
+
+	CString mStrCasFile;
+	
+	afx_msg void OnBnClickedBtSendCas();
+
+	BOOL mLoadCASPath();
+	BOOL mLoadCASCount();
+	void mSaveCASPath();
+	void mSaveCASCount();
+	void SaveFile(CString _str);
+
+	void mGetCASID();
+	
+	void mUpdateCasID();
+	void mUpdatePath(CString _path);
+	void mUpdateButton(BOOL _flag);
+	void mUpdateButtonConnect(BOOL _flag);
+
+
+	CString mStrCasPath;		//CAS DB Full Path
+	CString mStrCasFileName;	//CAS DB File Name
+	CString mStrCasNumberName;	// CAS Number
+	CString mStrCasKey;			//CAS Key
+	int mIntCurNumber;
+	int mIntTotalNumber;
+
+	afx_msg void OnBnClickedBtGetSerial();
+	afx_msg void OnBnClickedBtGetCas();
+};

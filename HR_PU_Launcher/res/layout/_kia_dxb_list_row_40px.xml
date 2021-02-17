@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="63dp" >
+
+    <TextView
+        android:id="@+id/rl_list_item"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:background="@drawable/_kia_setting_list_item" />
+   
+    <TextView
+        android:id="@+id/list_row_index"
+        style="@style/font_28"
+        android:layout_width="40dp"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="5dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/list_row_name"
+        style="@style/font_28"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="50dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:singleLine="true" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/list_row_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent" >
+    </TextView>
+
+</RelativeLayout>

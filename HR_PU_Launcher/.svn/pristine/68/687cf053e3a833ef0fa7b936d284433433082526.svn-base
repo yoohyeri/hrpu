@@ -1,0 +1,43 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mdstec.android.tpeg"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+	
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <service
+            android:name="com.mdstec.android.tpeg.decoder.TpegService"
+            android:exported="true" 
+            android:process=":remote">
+
+            <!-- This intent filter is a clue for the system that this is an accessibility service -->
+            <intent-filter>
+                <action android:name="com.mdstec.android.tpeg.action.tpeg" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="com.mdstec.android.tpeg.TpegServiceManager"
+            android:enabled="true"
+            android:exported="false"
+            android:label="TpegServiceManager" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>
