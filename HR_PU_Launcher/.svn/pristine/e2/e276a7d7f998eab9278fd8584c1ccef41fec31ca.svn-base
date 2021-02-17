@@ -1,8 +1,0 @@
-package com.mobilusauto.app.productionprocess;
-
-public class MD_Setting {
-	public String number;
-	public String title;
-	public String result;
-	public boolean enable;
-}

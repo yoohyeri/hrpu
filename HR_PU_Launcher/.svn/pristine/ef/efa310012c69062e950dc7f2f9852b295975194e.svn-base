@@ -1,7 +1,0 @@
-package com.mdstec.android.tpeg.config;
-
-import com.mdstec.android.tpeg.decoder.Tpegdec;
-
-public class CONFIG {
-	public static int ServiceProvider = Tpegdec.TST_KBS;
-}
